@@ -415,7 +415,7 @@ nav {
     width: 16px;
     height: 16px;
     fill: var(--color-ivory);
-    transform: rotate(45deg);
+    transform: rotate(-90deg);
 }
 
 .hero-seed-hint {

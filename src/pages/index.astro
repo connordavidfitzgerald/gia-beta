@@ -39,12 +39,14 @@ import plant from "../assets/images/plant.png";
                     always free. You only pay when you're awarded.
                 </p>
 
-                <div class="email-signup">
+                <form id="email-form" class="email-signup">
                     <div class="email-input-wrap">
                         <input
                             type="email"
+                            name="email"
                             class="email-input"
                             placeholder="Enter your email."
+                            required
                         />
                         <button class="email-submit" type="submit">
                             <svg
@@ -52,11 +54,13 @@ import plant from "../assets/images/plant.png";
                                 viewBox="0 0 24 24"
                                 fill="currentColor"
                             >
-                                <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+                                <path
+                                    d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"
+                                ></path>
                             </svg>
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
 
             <div class="hero-seed-hint">
@@ -560,6 +564,46 @@ import plant from "../assets/images/plant.png";
                 }
                 const progress = Math.min(scrolled / maxScroll, 1);
                 setStep(Math.min(Math.floor(progress * 4), 3));
+            });
+        </script>
+
+        <!-- Web3Forms Email Signup -->
+        <script>
+            const form = document.getElementById('email-form');
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const formData = new FormData(form);
+                formData.append("access_key", "cb47c73b-587b-47cf-894c-3aeea5b3d35b");
+
+                const originalText = submitBtn.innerHTML;
+
+                submitBtn.innerHTML = '<svg class="email-submit-arrow" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 6L7 12L15 18L12 22L4 12Z"/></svg>';
+                submitBtn.disabled = true;
+
+                try {
+                    const response = await fetch("https://api.web3forms.com/submit", {
+                        method: "POST",
+                        body: formData
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        alert("Success! Your email has been submitted.");
+                        form.reset();
+                    } else {
+                        alert("Error: " + data.message);
+                    }
+
+                } catch (error) {
+                    alert("Something went wrong. Please try again.");
+                } finally {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
             });
         </script>
     </body>
