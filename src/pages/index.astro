@@ -1,0 +1,558 @@
+---
+import "../styles/global.css";
+import { Font, type CssVariable, Picture } from "astro:assets";
+const FONTS: CssVariable[] = ["--font-sans", "--font-serif"];
+import plant from "../assets/images/plant.png";
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gia — Grants made simple.</title>
+
+        {FONTS.map((font) => <Font cssVariable={font} preload />)}
+    </head>
+    <body>
+        <!-- ─── NAV ─── -->
+        <nav>
+            <div class="nav-logo">Gia</div>
+            <div class="flex flex-row gap-0.5 justify-end">
+                <a class="nav-cta-reg">Community Breakfasts</a>
+                <a href="#booking" class="nav-cta">Try Gia for free →</a>
+            </div>
+        </nav>
+
+        <!-- ─── HERO ─── -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <div class="hero-tag">
+                    <span class="hero-tag-dot"></span>
+                    Now in beta · Montréal, Québec
+                </div>
+                <h1>Grants made <em>simple.</em></h1>
+                <p class="hero-sub">
+                    Gia finds the right grants for your nonprofit or arts
+                    project — and helps you actually win them. Discovery is
+                    always free. You only pay when you're awarded.
+                </p>
+
+                <div class="hero-free-note">
+                    <span>🔍 <strong>FREE</strong> — discovery & matching</span>
+                    <span
+                        >📁 <strong>FREE</strong> — org profile & document vault</span
+                    >
+                    <span
+                        >📋 <strong>FREE</strong> — all application guides</span
+                    >
+                </div>
+            </div>
+
+            <div class="hero-seed-hint">
+                <span>scroll</span>
+                <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
+                    <path
+                        d="M8 0v20M1 13l7 7 7-7"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- ─── SCROLL JOURNEY ─── -->
+        <section id="how-it-works" class="journey">
+            <div class="journey-sticky-container">
+                <div class="journey-sticky">
+                    <!-- Content Panels -->
+                    <div class="journey-panels flex flex-row justify-center">
+                        <!-- STEP 0: Discovery call -->
+                        <div class="journey-panel active" id="panel-0">
+                            <div class="step-number">Step 01 — The seed</div>
+                            <h2>
+                                It starts with<br />a real <em>conversation.</em
+                                >
+                            </h2>
+                            <p>
+                                Book a free 20-minute discovery call with
+                                Jordane, our grant specialist. Tell her what
+                                you're working on — in your own words.
+                            </p>
+                            <p>
+                                After the call, Gia processes the transcript and
+                                your documents in one go, building a complete
+                                org profile. When you log in for the first time,
+                                your first grant recommendations are already
+                                waiting.
+                            </p>
+                            <ul class="detail-list">
+                                <li>20 minutes with a real human expert</li>
+                                <li>
+                                    Send your documents ahead — Gia handles the
+                                    rest
+                                </li>
+                                <li>
+                                    First login: recommendations already there
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- STEP 1: Profile & vault -->
+                        <div class="journey-panel" id="panel-1">
+                            <div class="step-number">Step 02 — The roots</div>
+                            <h2>Gia builds your<br /><em>org profile.</em></h2>
+                            <p>
+                                After your call, Gia processes the transcript
+                                and your documents in one go — letters patent,
+                                annual report, financials. Everything lives in
+                                your document vault, organized and ready.
+                            </p>
+                            <p>
+                                This profile powers every grant match, now and
+                                in the future. The more Gia knows about your
+                                org, the sharper and more specific the
+                                recommendations become.
+                            </p>
+                            <ul class="detail-list">
+                                <li>
+                                    Documents processed once, referenced forever
+                                </li>
+                                <li>
+                                    Org profile reviewed and confirmed by
+                                    Jordane
+                                </li>
+                                <li>Your vault grows with every new project</li>
+                            </ul>
+                        </div>
+
+                        <!-- STEP 2: Recommendations dashboard -->
+                        <div class="journey-panel" id="panel-2">
+                            <div class="step-number">Step 03 — The growth</div>
+                            <h2>
+                                Grants ranked.<br /><em>Honest</em> about your chances.
+                            </h2>
+                            <p>
+                                Each grant card shows you match quality (Strong
+                                / Good / Possible), real acceptance rate data
+                                from funder reports, the next deadline, and a
+                                one-sentence explanation of why it fits your
+                                specific project.
+                            </p>
+                            <p>
+                                Every recommended grant also comes with a free
+                                application guide — what to prepare, what you
+                                already have, and how long it typically takes.
+                            </p>
+                            <ul class="detail-list">
+                                <li>
+                                    Match quality labels — no false confidence
+                                </li>
+                                <li>
+                                    Acceptance rates sourced from public funder
+                                    data
+                                </li>
+                                <li>
+                                    Application guide + document checklist
+                                    included
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- STEP 3: Apply with Jordane -->
+                        <div class="journey-panel" id="panel-3">
+                            <div class="step-number">Step 04 — The harvest</div>
+                            <h2>
+                                Ready to apply?<br />Let <em>Jordane</em> write it.
+                            </h2>
+                            <p>
+                                When you're ready to apply, Jordane takes over.
+                                She reviews your profile, selects the strongest
+                                match, and writes the application herself — with
+                                AI generating the first draft internally to
+                                multiply her capacity.
+                            </p>
+                            <p>
+                                Gia charges 10% of the awarded amount — and only
+                                when you're successful. Nothing up front.
+                                Nothing if it doesn't come through.
+                            </p>
+                            <ul class="detail-list">
+                                <li>
+                                    Jordane writes and submits — you stay
+                                    focused on your work
+                                </li>
+                                <li>
+                                    10% of the awarded grant, payable only on
+                                    success
+                                </li>
+                                <li>
+                                    Industry standard is 8–12% — Gia is
+                                    intentionally lower
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── TRUST BAR ─── -->
+        <div class="trust-bar">
+            <div class="trust-item">
+                <div class="trust-icon">🏛️</div>
+                <span>CALQ, Canada Council, CAM, Canadian Heritage & more</span>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🌍</div>
+                <span>Bilingual French & English, day one</span>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🤝</div>
+                <span>A Montréal workers' cooperative</span>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🎯</div>
+                <span>Built exclusively for OBNLs & artists</span>
+            </div>
+        </div>
+
+        <!-- ─── FEATURES ─── -->
+        <section class="features">
+            <div class="section-label">Why Gia</div>
+            <h2 class="features-headline">
+                Not another<br />grant <em>directory.</em>
+            </h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🧠</span>
+                    <h3>She learns your org</h3>
+                    <p>
+                        Your profile and document vault power every
+                        recommendation. Letters patent, annual report,
+                        financials — upload once, used forever. The more Gia
+                        knows, the sharper the matches.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🎯</span>
+                    <h3>Ranked, not just listed</h3>
+                    <p>
+                        Gia doesn't dump 200 grants on you. She surfaces the 5
+                        most likely to succeed — and explains why, in plain
+                        language, based on your specific project and org
+                        profile.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📋</span>
+                    <h3>Application-ready guides</h3>
+                    <p>
+                        Every grant comes with a curated prep guide: what you
+                        need, what you already have, word limits, typical
+                        questions, estimated time. Built by Jordane, not an
+                        algorithm.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">💬</span>
+                    <h3>Project-based, not org-wide</h3>
+                    <p>
+                        Grants follow projects, not the other way around. Each
+                        funding need gets its own project — with its own matched
+                        grants, application guide, and progress tracker.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🌿</span>
+                    <h3>Built for the social economy</h3>
+                    <p>
+                        We serve OBNLs and artists — that's it. Gia is a
+                        workers' cooperative, run by the same kind of
+                        organizations it serves. No corporate clients. No
+                        competing priorities.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">👩</span>
+                    <h3>Human expertise at the core</h3>
+                    <p>
+                        Jordane has deep knowledge of Quebec and Canadian
+                        funders — CALQ, CAM, Canada Council, Canadian Heritage.
+                        That institutional knowledge is Gia's real competitive
+                        edge.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── PULL QUOTE ─── -->
+        <section class="quote-section">
+            <div class="quote-inner">
+                <span class="quote-mark">"</span>
+                <blockquote>
+                    Finding the right grant used to mean weeks of research and a
+                    pile of dead ends. Gia surfaced five matches in the time it
+                    took me to make a coffee — including two programs I'd never
+                    heard of.
+                </blockquote>
+                <p class="quote-attr">
+                    — Beta tester, arts organization, Montréal
+                </p>
+            </div>
+        </section>
+
+        <!-- ─── PRICING ─── -->
+        <section class="pricing">
+            <div class="pricing-intro">
+                <div class="section-label">How it works</div>
+                <h2 class="features-headline">
+                    100% free to<br />discover. Pay only<br />when you <em
+                        >win.</em
+                    >
+                </h2>
+            </div>
+
+            <div class="pricing-cards">
+                <!-- Free tier -->
+                <div class="pricing-card">
+                    <h3>Discovery & matching</h3>
+                    <div class="price">Free.</div>
+                    <p class="price-note">
+                        Everything up to the application is completely free — no
+                        credits, no subscription, no time limit. Explore as many
+                        projects as you need.
+                    </p>
+                    <ul class="pricing-features">
+                        <li>Free 20-minute discovery call with Jordane</li>
+                        <li>Org profile + document vault, always free</li>
+                        <li>Grant matching — all projects are free to match</li>
+                        <li>5 ranked recommendations per project</li>
+                        <li>Full application guides for every match</li>
+                        <li>Free positioning deep-dives for any grant</li>
+                        <li>Suggest grants to the database</li>
+                    </ul>
+                    <a href="#booking" class="btn-outline">Start for free →</a>
+                </div>
+
+                <!-- Apply with Jordane -->
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Apply with Jordane</div>
+                    <h3>Let Jordane write it</h3>
+                    <div class="price">10%</div>
+                    <p class="price-note">
+                        of the awarded grant amount — and only if you're
+                        successful. Zero out of pocket if the grant isn't
+                        awarded.
+                    </p>
+                    <ul class="pricing-features">
+                        <li>
+                            Jordane selects the strongest match for your project
+                        </li>
+                        <li>Brief alignment call to confirm strategy</li>
+                        <li>Jordane writes and submits the application</li>
+                        <li>Progress tracked in your dashboard</li>
+                        <li>
+                            Payment captured automatically on award confirmation
+                        </li>
+                        <li>Zero risk — nothing owed if unsuccessful</li>
+                    </ul>
+                    <a href="#booking" class="btn-white"
+                        >Book a discovery call →</a
+                    >
+                </div>
+            </div>
+
+            <p class="pricing-footnote">
+                Grant writers typically charge 8–12% of awarded amounts. Gia's
+                10% is intentionally at the lower end — and zero risk to you.
+            </p>
+        </section>
+
+        <!-- ─── FINAL CTA ─── -->
+        <section id="booking" class="final-cta">
+            <div class="final-cta-inner">
+                <div class="jordane-avatar">🌿</div>
+                <h2>Meet Jordane.<br /><em>Find your next grant.</em></h2>
+                <p>
+                    Book a free 20-minute discovery call with Jordane, our grant
+                    specialist. Tell her about your organization and what you're
+                    working on. You'll log in after the call and find Gia
+                    already has your first recommendations waiting — no forms,
+                    no homework required.
+                </p>
+                <div class="final-cta-actions">
+                    <a href="#" class="btn-cta-large">
+                        🌱 Book a free discovery call
+                    </a>
+                    <p class="cta-note">
+                        20 minutes. Free. No pressure. Available in French and
+                        English.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── FOOTER ─── -->
+        <footer>
+            <div class="footer-logo">gia · heygia.ca</div>
+            <ul class="footer-links">
+                <li><a href="#">How it works</a></li>
+                <li><a href="#">For artists</a></li>
+                <li><a href="#">About AAA</a></li>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">FR / EN</a></li>
+            </ul>
+            <div class="footer-copy">
+                © 2026 Atelier Archives Appliqués · Une coopérative de
+                travailleurs · Montréal, Québec · heygia.ca
+            </div>
+        </footer>
+
+        <!-- ─── SCROLL LOGIC ─── -->
+        <script>
+            const panels = document.querySelectorAll(".journey-panel");
+            const plantEls = {
+                seed: document.getElementById("seed"),
+                pot: document.getElementById("pot"),
+                roots: document.getElementById("roots"),
+                stem: document.getElementById("stem"),
+                leaf1: document.getElementById("leaf-1"),
+                leaf2: document.getElementById("leaf-2"),
+                leaf3: document.getElementById("leaf-3"),
+                leaf4: document.getElementById("leaf-4"),
+                coins: document.getElementById("coins"),
+                topCoin: document.getElementById("top-coin"),
+            };
+
+            const labels = {
+                seed: document.getElementById("label-seed"),
+                roots: document.getElementById("label-roots"),
+                plant: document.getElementById("label-plant"),
+                full: document.getElementById("label-full"),
+            };
+
+            function show(el) {
+                if (el) el.style.opacity = "1";
+            }
+            function hide(el) {
+                if (el) el.style.opacity = "0";
+            }
+            function showLabel(key) {
+                if (labels[key]) labels[key].classList.add("visible");
+            }
+            function hideLabel(key) {
+                if (labels[key]) labels[key].classList.remove("visible");
+            }
+
+            const plantStates = [
+                () => {
+                    show(plantEls.pot);
+                    show(plantEls.seed);
+                    hide(plantEls.roots);
+                    hide(plantEls.stem);
+                    hide(plantEls.leaf1);
+                    hide(plantEls.leaf2);
+                    hide(plantEls.leaf3);
+                    hide(plantEls.leaf4);
+                    hide(plantEls.coins);
+                    hide(plantEls.topCoin);
+                    showLabel("seed");
+                    hideLabel("roots");
+                    hideLabel("plant");
+                    hideLabel("full");
+                },
+                () => {
+                    show(plantEls.pot);
+                    show(plantEls.seed);
+                    show(plantEls.roots);
+                    show(plantEls.stem);
+                    show(plantEls.leaf1);
+                    hide(plantEls.leaf2);
+                    hide(plantEls.leaf3);
+                    hide(plantEls.leaf4);
+                    hide(plantEls.coins);
+                    hide(plantEls.topCoin);
+                    hideLabel("seed");
+                    showLabel("roots");
+                    hideLabel("plant");
+                    hideLabel("full");
+                },
+                () => {
+                    show(plantEls.pot);
+                    show(plantEls.seed);
+                    show(plantEls.roots);
+                    show(plantEls.stem);
+                    show(plantEls.leaf1);
+                    show(plantEls.leaf2);
+                    show(plantEls.leaf3);
+                    show(plantEls.leaf4);
+                    hide(plantEls.coins);
+                    hide(plantEls.topCoin);
+                    hideLabel("seed");
+                    hideLabel("roots");
+                    showLabel("plant");
+                    hideLabel("full");
+                },
+                () => {
+                    show(plantEls.pot);
+                    show(plantEls.seed);
+                    show(plantEls.roots);
+                    show(plantEls.stem);
+                    show(plantEls.leaf1);
+                    show(plantEls.leaf2);
+                    show(plantEls.leaf3);
+                    show(plantEls.leaf4);
+                    show(plantEls.coins);
+                    show(plantEls.topCoin);
+                    hideLabel("seed");
+                    hideLabel("roots");
+                    hideLabel("plant");
+                    showLabel("full");
+                },
+            ];
+
+            Object.values(plantEls).forEach((el) => {
+                if (el)
+                    el.style.transition =
+                        "opacity 0.7s cubic-bezier(0.4,0,0.2,1)";
+            });
+
+            let currentStep = 0;
+            plantStates[0]();
+
+            function setStep(step) {
+                if (step === currentStep) return;
+                currentStep = step;
+                panels.forEach((p, i) =>
+                    p.classList.toggle("active", i === step),
+                );
+                if (plantStates[step]) plantStates[step]();
+            }
+
+            function isMobile() {
+                return window.innerWidth < 769;
+            }
+
+            window.addEventListener("scroll", () => {
+                if (isMobile()) return;
+                const container = document.querySelector(
+                    ".journey-sticky-container",
+                );
+                if (!container) return;
+                const rect = container.getBoundingClientRect();
+                const scrolled = -rect.top;
+                const maxScroll = container.offsetHeight - window.innerHeight;
+                if (scrolled < 0 || maxScroll <= 0) {
+                    setStep(0);
+                    return;
+                }
+                const progress = Math.min(scrolled / maxScroll, 1);
+                setStep(Math.min(Math.floor(progress * 4), 3));
+            });
+        </script>
+    </body>
+</html>

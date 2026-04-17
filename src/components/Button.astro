@@ -1,0 +1,34 @@
+---
+import "../styles/global.css";
+
+interface Props {
+    text: string;
+    href?: string;
+    type?: "button" | "submit" | "reset";
+    variant?: "primary" | "secondary";
+    disabled?: boolean;
+}
+
+const { text, href, type = "button", disabled = false } = Astro.props;
+
+const baseClasses =
+    "flex flex-row items-center justify-center font-medium rounded-lg transition-colors duration-200 cursor-pointer bg-parchment text-charcoal hover:bg-charcoal hover:text-ivory font-sans w-fit h-fit";
+
+const classes = `${baseClasses} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`;
+---
+
+{
+    href ? (
+        <a
+            href={href}
+            class={`${classes} py-4 px-6`}
+            aria-disabled={disabled ? "true" : undefined}
+        >
+            {text}
+        </a>
+    ) : (
+        <button type={type} class={classes} disabled={disabled}>
+            {text}
+        </button>
+    )
+}
