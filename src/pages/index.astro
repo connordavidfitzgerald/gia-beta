@@ -1,30 +1,18 @@
 ---
+import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
 import { Font, type CssVariable, Picture } from "astro:assets";
 const FONTS: CssVariable[] = ["--font-sans", "--font-serif"];
 import plant from "../assets/images/plant.png";
 ---
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="view-transition" content="same-origin" />
-        <title>Gia — Grants made simple.</title>
+<Layout title="Gia — Grants made simple.">
+    <a href="/community" slot="nav-links" class="nav-link"
+        >Community Breakfasts</a
+    >
 
-        {FONTS.map((font) => <Font cssVariable={font} preload />)}
-    </head>
-    <body>
-        <!-- ─── NAV ─── -->
-        <nav>
-            <div class="nav-left">
-                <a href="/" class="nav-logo">gia <span>by AAA</span></a>
-                <a href="/community" class="nav-link">Community Breakfasts</a>
-            </div>
-            <a href="/coming-soon" class="nav-cta">Try Gia for free →</a>
-        </nav>
-
+    <!-- Main page content -->
+    <div class="page-content">
         <!-- ─── HERO ─── -->
         <section class="hero">
             <div class="hero-bg"></div>
@@ -33,37 +21,22 @@ import plant from "../assets/images/plant.png";
                     <span class="hero-tag-dot"></span>
                     Now in beta · Montréal, Québec
                 </div>
-                <h1>Grants made <em>simple.</em></h1>
+                <h1>Grants made<br /><em>simple.</em></h1>
                 <p class="hero-sub">
                     Gia finds the right grants for your nonprofit or arts
                     project — and helps you actually win them. Discovery is
                     always free. You only pay when you're awarded.
                 </p>
 
-                <form id="email-form" class="email-signup">
-                    <div class="email-input-wrap">
-                        <input
-                            type="email"
-                            name="email"
-                            class="email-input"
-                            placeholder="Enter your email."
-                            required
-                        />
-                        <button class="email-submit" type="submit">
-                            <svg
-                                class="email-submit-arrow"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                            >
-                                <path
-                                    d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"
-                                ></path>
-                            </svg>
-                        </button>
-                    </div>
-                </form>
+                <div class="hero-actions">
+                    <a href="/coming-soon" class="btn-primary">
+                        🌱 Try Gia for free
+                    </a>
+                    <a href="#how-it-works" class="btn-ghost">
+                        See how it works ↓
+                    </a>
+                </div>
             </div>
-
             <div class="hero-seed-hint">
                 <span>scroll</span>
                 <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
@@ -80,11 +53,14 @@ import plant from "../assets/images/plant.png";
         <section id="how-it-works" class="journey">
             <div class="journey-sticky-container">
                 <div class="journey-sticky">
-                    <!-- Content Panels -->
-                    <div class="journey-panels flex flex-row justify-center">
-                        <!-- STEP 0: Discovery call -->
+                    <div class="plant-canvas">
+                        <div class="plant-svg-wrap"></div>
+                    </div>
+                    <div class="journey-panels">
                         <div class="journey-panel active" id="panel-0">
-                            <div class="step-number">Step 01 — The seed</div>
+                            <div class="step-number">
+                                Step 01 — The seed · Free
+                            </div>
                             <h2>
                                 It starts with<br />a real <em>conversation.</em
                                 >
@@ -113,9 +89,10 @@ import plant from "../assets/images/plant.png";
                             </ul>
                         </div>
 
-                        <!-- STEP 1: Profile & vault -->
                         <div class="journey-panel" id="panel-1">
-                            <div class="step-number">Step 02 — The roots</div>
+                            <div class="step-number">
+                                Step 02 — The roots · Free
+                            </div>
                             <h2>Gia builds your<br /><em>org profile.</em></h2>
                             <p>
                                 After your call, Gia processes the transcript
@@ -141,9 +118,10 @@ import plant from "../assets/images/plant.png";
                             </ul>
                         </div>
 
-                        <!-- STEP 2: Recommendations dashboard -->
                         <div class="journey-panel" id="panel-2">
-                            <div class="step-number">Step 03 — The growth</div>
+                            <div class="step-number">
+                                Step 03 — The growth · Free
+                            </div>
                             <h2>
                                 Grants ranked.<br /><em>Honest</em> about your chances.
                             </h2>
@@ -174,9 +152,10 @@ import plant from "../assets/images/plant.png";
                             </ul>
                         </div>
 
-                        <!-- STEP 3: Apply with Jordane -->
                         <div class="journey-panel" id="panel-3">
-                            <div class="step-number">Step 04 — The harvest</div>
+                            <div class="step-number">
+                                Step 04 — The harvest · 10% on success only
+                            </div>
                             <h2>
                                 Ready to apply?<br />Let <em>Jordane</em> write it.
                             </h2>
@@ -213,7 +192,7 @@ import plant from "../assets/images/plant.png";
         </section>
 
         <!-- ─── TRUST BAR ─── -->
-        <div class="trust-bar uppercase">
+        <div class="trust-bar">
             <div class="trust-item">
                 <div class="trust-icon">🏛️</div>
                 <span>CALQ, Canada Council, CAM, Canadian Heritage & more</span>
@@ -330,7 +309,6 @@ import plant from "../assets/images/plant.png";
             </div>
 
             <div class="pricing-cards">
-                <!-- Free tier -->
                 <div class="pricing-card">
                     <h3>Discovery & matching</h3>
                     <div class="price">Free.</div>
@@ -353,7 +331,6 @@ import plant from "../assets/images/plant.png";
                     >
                 </div>
 
-                <!-- Apply with Jordane -->
                 <div class="pricing-card featured">
                     <div class="pricing-badge">Apply with Jordane</div>
                     <h3>Let Jordane write it</h3>
@@ -390,6 +367,7 @@ import plant from "../assets/images/plant.png";
         <!-- ─── FINAL CTA ─── -->
         <section id="booking" class="final-cta">
             <div class="final-cta-inner">
+                <div class="jordane-avatar">🌿</div>
                 <h2>Meet Jordane.<br /><em>Find your next grant.</em></h2>
                 <p>
                     Book a free 20-minute discovery call with Jordane, our grant
@@ -409,244 +387,197 @@ import plant from "../assets/images/plant.png";
                 </div>
             </div>
         </section>
+    </div>
 
-        <!-- ─── FOOTER ─── -->
-        <footer>
-            <div class="footer-logo">Gia</div>
-            <ul class="footer-links">
-                <li><a href="#">How it works</a></li>
-                <li><a href="#">For artists</a></li>
-                <li><a href="#">About AAA</a></li>
-                <li><a href="#">Instagram</a></li>
-                <li><a href="#">LinkedIn</a></li>
-                <li><a href="#">FR / EN</a></li>
-            </ul>
-            <div class="footer-copy">
-                © 2026 Atelier Archives Appliqués · Une coopérative de
-                travailleurs · Montréal, Québec · heygia.ca
-            </div>
-        </footer>
+    <!-- Web3Forms Email Signup -->
+    <script slot="scripts">
+        const form = document.getElementById("email-form");
+        const submitBtn = form.querySelector('button[type="submit"]');
 
-        <!-- ─── SCROLL LOGIC ─── -->
-        <script>
-            const panels = document.querySelectorAll(".journey-panel");
-            const plantEls = {
-                seed: document.getElementById("seed"),
-                pot: document.getElementById("pot"),
-                roots: document.getElementById("roots"),
-                stem: document.getElementById("stem"),
-                leaf1: document.getElementById("leaf-1"),
-                leaf2: document.getElementById("leaf-2"),
-                leaf3: document.getElementById("leaf-3"),
-                leaf4: document.getElementById("leaf-4"),
-                coins: document.getElementById("coins"),
-                topCoin: document.getElementById("top-coin"),
-            };
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-            const labels = {
-                seed: document.getElementById("label-seed"),
-                roots: document.getElementById("label-roots"),
-                plant: document.getElementById("label-plant"),
-                full: document.getElementById("label-full"),
-            };
+            const formData = new FormData(form);
+            formData.append(
+                "access_key",
+                "cb47c73b-587b-47cf-894c-3aeea5b3d35b",
+            );
 
-            function show(el) {
-                if (el) el.style.opacity = "1";
-            }
-            function hide(el) {
-                if (el) el.style.opacity = "0";
-            }
-            function showLabel(key) {
-                if (labels[key]) labels[key].classList.add("visible");
-            }
-            function hideLabel(key) {
-                if (labels[key]) labels[key].classList.remove("visible");
-            }
+            const originalText = submitBtn.innerHTML;
 
-            const plantStates = [
-                () => {
-                    show(plantEls.pot);
-                    show(plantEls.seed);
-                    hide(plantEls.roots);
-                    hide(plantEls.stem);
-                    hide(plantEls.leaf1);
-                    hide(plantEls.leaf2);
-                    hide(plantEls.leaf3);
-                    hide(plantEls.leaf4);
-                    hide(plantEls.coins);
-                    hide(plantEls.topCoin);
-                    showLabel("seed");
-                    hideLabel("roots");
-                    hideLabel("plant");
-                    hideLabel("full");
-                },
-                () => {
-                    show(plantEls.pot);
-                    show(plantEls.seed);
-                    show(plantEls.roots);
-                    show(plantEls.stem);
-                    show(plantEls.leaf1);
-                    hide(plantEls.leaf2);
-                    hide(plantEls.leaf3);
-                    hide(plantEls.leaf4);
-                    hide(plantEls.coins);
-                    hide(plantEls.topCoin);
-                    hideLabel("seed");
-                    showLabel("roots");
-                    hideLabel("plant");
-                    hideLabel("full");
-                },
-                () => {
-                    show(plantEls.pot);
-                    show(plantEls.seed);
-                    show(plantEls.roots);
-                    show(plantEls.stem);
-                    show(plantEls.leaf1);
-                    show(plantEls.leaf2);
-                    show(plantEls.leaf3);
-                    show(plantEls.leaf4);
-                    hide(plantEls.coins);
-                    hide(plantEls.topCoin);
-                    hideLabel("seed");
-                    hideLabel("roots");
-                    showLabel("plant");
-                    hideLabel("full");
-                },
-                () => {
-                    show(plantEls.pot);
-                    show(plantEls.seed);
-                    show(plantEls.roots);
-                    show(plantEls.stem);
-                    show(plantEls.leaf1);
-                    show(plantEls.leaf2);
-                    show(plantEls.leaf3);
-                    show(plantEls.leaf4);
-                    show(plantEls.coins);
-                    show(plantEls.topCoin);
-                    hideLabel("seed");
-                    hideLabel("roots");
-                    hideLabel("plant");
-                    showLabel("full");
-                },
-            ];
+            submitBtn.innerHTML =
+                '<svg class="email-submit-arrow" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 6L7 12L15 18L12 22L4 12Z"/></svg>';
+            submitBtn.disabled = true;
 
-            Object.values(plantEls).forEach((el) => {
-                if (el)
-                    el.style.transition =
-                        "opacity 0.7s cubic-bezier(0.4,0,0.2,1)";
-            });
-
-            let currentStep = 0;
-            plantStates[0]();
-
-            function setStep(step) {
-                if (step === currentStep) return;
-                currentStep = step;
-                panels.forEach((p, i) =>
-                    p.classList.toggle("active", i === step),
+            try {
+                const response = await fetch(
+                    "https://api.web3forms.com/submit",
+                    {
+                        method: "POST",
+                        body: formData,
+                    },
                 );
-                if (plantStates[step]) plantStates[step]();
-            }
 
-            function isMobile() {
-                return window.innerWidth < 769;
-            }
+                const data = await response.json();
 
-            window.addEventListener("scroll", () => {
-                if (isMobile()) return;
-                const container = document.querySelector(
-                    ".journey-sticky-container",
-                );
-                if (!container) return;
-                const rect = container.getBoundingClientRect();
-                const scrolled = -rect.top;
-                const maxScroll = container.offsetHeight - window.innerHeight;
-                if (scrolled < 0 || maxScroll <= 0) {
-                    setStep(0);
-                    return;
+                if (response.ok) {
+                    alert("Success! Your email has been submitted.");
+                    form.reset();
+                } else {
+                    alert("Error: " + data.message);
                 }
-                const progress = Math.min(scrolled / maxScroll, 1);
-                setStep(Math.min(Math.floor(progress * 4), 3));
-            });
-        </script>
-
-        <!-- View Transitions -->
-        <script>
-            // View Transition API polyfill and enhancement
-            if (document.startViewTransition) {
-                console.log("View Transitions API is supported");
-
-                // Intercept all link clicks for smooth transitions
-                document.addEventListener("click", (e) => {
-                    const link = e.target.closest("a");
-                    if (
-                        link &&
-                        link.href &&
-                        link.origin === window.location.origin &&
-                        !link.href.startsWith("#")
-                    ) {
-                        e.preventDefault();
-                        const url = new URL(link.href);
-
-                        // Use View Transition API for same-origin navigation
-                        const transition = document.startViewTransition(
-                            async () => {
-                                await new Promise((resolve) =>
-                                    setTimeout(resolve, 50),
-                                );
-                                window.location.href = url.href;
-                            },
-                        );
-                    }
-                });
-            } else {
-                // Fallback for browsers that don't support View Transitions
-                console.log("View Transitions API not supported");
+            } catch (error) {
+                alert("Something went wrong. Please try again.");
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
             }
-        </script>
+        });
+    </script>
 
-        <!-- Web3Forms Email Signup -->
-        <script>
-            const form = document.getElementById("email-form");
-            const submitBtn = form.querySelector('button[type="submit"]');
+    <!-- Scroll Logic -->
+    <script slot="scripts">
+        const panels = document.querySelectorAll(".journey-panel");
+        const plantEls = {
+            seed: document.getElementById("seed"),
+            pot: document.getElementById("pot"),
+            roots: document.getElementById("roots"),
+            stem: document.getElementById("stem"),
+            leaf1: document.getElementById("leaf-1"),
+            leaf2: document.getElementById("leaf-2"),
+            leaf3: document.getElementById("leaf-3"),
+            leaf4: document.getElementById("leaf-4"),
+            coins: document.getElementById("coins"),
+            topCoin: document.getElementById("top-coin"),
+        };
 
-            form.addEventListener("submit", async (e) => {
-                e.preventDefault();
+        const labels = {
+            seed: document.getElementById("label-seed"),
+            roots: document.getElementById("label-roots"),
+            plant: document.getElementById("label-plant"),
+            full: document.getElementById("label-full"),
+        };
 
-                const formData = new FormData(form);
-                formData.append(
-                    "access_key",
-                    "cb47c73b-587b-47cf-894c-3aeea5b3d35b",
-                );
+        function show(el) {
+            if (el) el.style.opacity = "1";
+        }
+        function hide(el) {
+            if (el) el.style.opacity = "0";
+        }
+        function showLabel(key) {
+            if (labels[key]) labels[key].classList.add("visible");
+        }
+        function hideLabel(key) {
+            if (labels[key]) labels[key].classList.remove("visible");
+        }
 
-                const originalText = submitBtn.innerHTML;
+        const plantStates = [
+            () => {
+                show(plantEls.pot);
+                show(plantEls.seed);
+                hide(plantEls.roots);
+                hide(plantEls.stem);
+                hide(plantEls.leaf1);
+                hide(plantEls.leaf2);
+                hide(plantEls.leaf3);
+                hide(plantEls.leaf4);
+                hide(plantEls.coins);
+                hide(plantEls.topCoin);
+                showLabel("seed");
+                hideLabel("roots");
+                hideLabel("plant");
+                hideLabel("full");
+            },
+            () => {
+                show(plantEls.pot);
+                show(plantEls.seed);
+                show(plantEls.roots);
+                show(plantEls.stem);
+                show(plantEls.leaf1);
+                hide(plantEls.leaf2);
+                hide(plantEls.leaf3);
+                hide(plantEls.leaf4);
+                hide(plantEls.coins);
+                hide(plantEls.topCoin);
+                hideLabel("seed");
+                showLabel("roots");
+                hideLabel("plant");
+                hideLabel("full");
+            },
+            () => {
+                show(plantEls.pot);
+                show(plantEls.seed);
+                show(plantEls.roots);
+                show(plantEls.stem);
+                show(plantEls.leaf1);
+                show(plantEls.leaf2);
+                show(plantEls.leaf3);
+                show(plantEls.leaf4);
+                hide(plantEls.coins);
+                hide(plantEls.topCoin);
+                hideLabel("seed");
+                hideLabel("roots");
+                showLabel("plant");
+                hideLabel("full");
+            },
+            () => {
+                show(plantEls.pot);
+                show(plantEls.seed);
+                show(plantEls.roots);
+                show(plantEls.stem);
+                show(plantEls.leaf1);
+                show(plantEls.leaf2);
+                show(plantEls.leaf3);
+                show(plantEls.leaf4);
+                show(plantEls.coins);
+                show(plantEls.topCoin);
+                hideLabel("seed");
+                hideLabel("roots");
+                hideLabel("plant");
+                showLabel("full");
+            },
+        ];
 
-                submitBtn.disabled = true;
+        Object.values(plantEls).forEach((el) => {
+            if (el)
+                el.style.transition = "opacity 0.7s cubic-bezier(0.4,0,0.2,1)";
+        });
 
-                try {
-                    const response = await fetch(
-                        "https://api.web3forms.com/submit",
-                        {
-                            method: "POST",
-                            body: formData,
-                        },
-                    );
+        let currentStep = 0;
+        plantStates[0]();
 
-                    const data = await response.json();
+        function setStep(step) {
+            if (step === currentStep) return;
+            currentStep = step;
+            panels.forEach((p, i) => p.classList.toggle("active", i === step));
+            if (plantStates[step]) plantStates[step]();
+        }
 
-                    if (response.ok) {
-                        alert("Success! Your email has been submitted.");
-                        form.reset();
-                    } else {
-                        alert("Error: " + data.message);
-                    }
-                } catch (error) {
-                    alert("Something went wrong. Please try again.");
-                } finally {
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                }
-            });
-        </script>
-    </body>
-</html>
+        function isMobile() {
+            return window.innerWidth < 769;
+        }
+
+        window.addEventListener("scroll", () => {
+            if (isMobile()) return;
+            const container = document.querySelector(
+                ".journey-sticky-container",
+            );
+            if (!container) return;
+            const rect = container.getBoundingClientRect();
+            const scrolled = -rect.top;
+            const maxScroll = container.offsetHeight - window.innerHeight;
+            if (scrolled < 0 || maxScroll <= 0) {
+                setStep(0);
+                return;
+            }
+            const progress = Math.min(scrolled / maxScroll, 1);
+            setStep(Math.min(Math.floor(progress * 4), 3));
+        });
+    </script>
+</Layout>
+
+<style>
+    .page-content {
+        padding-top: 80px;
+    }
+</style>

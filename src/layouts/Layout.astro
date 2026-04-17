@@ -1,0 +1,88 @@
+<!--
+  Layout.astro - Consistent layout for all pages
+  Includes navigation, footer, and common styles
+-->
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="view-transition" content="same-origin" />
+        <title>Gia</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+            rel="stylesheet"
+        />
+        <slot name="head" />
+    </head>
+
+    <body>
+        <!-- ─── NAV ─── -->
+        <nav>
+            <div class="nav-left">
+                <a href="/" class="nav-logo"> Gia </a>
+                <slot name="nav-links" />
+            </div>
+            <a href="/coming-soon" class="nav-cta">Try Gia for free →</a>
+        </nav>
+
+        <!-- Main content -->
+        <main>
+            <slot />
+        </main>
+
+        <!-- ─── FOOTER ─── -->
+        <footer>
+            <div class="footer-logo">gia · heygia.ca</div>
+            <ul class="footer-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/#how-it-works">How it works</a></li>
+                <li><a href="#">For artists</a></li>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">FR / EN</a></li>
+            </ul>
+            <div class="footer-copy">
+                © 2026 Atelier Archives Appliqués · Une coopérative de
+                travailleurs · Montréal, Québec · heygia.ca
+            </div>
+        </footer>
+
+        <!-- View Transitions -->
+        <script>
+            // View Transition API polyfill and enhancement
+            if (document.startViewTransition) {
+                console.log("View Transitions API is supported");
+
+                // Intercept all link clicks for smooth transitions
+                document.addEventListener("click", (e) => {
+                    const link = e.target.closest("a");
+                    if (
+                        link &&
+                        link.href &&
+                        link.origin === window.location.origin
+                    ) {
+                        e.preventDefault();
+                        const url = new URL(link.href);
+
+                        // Use View Transition API for same-origin navigation
+                        const transition = document.startViewTransition(
+                            async () => {
+                                await new Promise((resolve) =>
+                                    setTimeout(resolve, 50),
+                                );
+                                window.location.href = url.href;
+                            },
+                        );
+                    }
+                });
+            } else {
+                // Fallback for browsers that don't support View Transitions
+                console.log("View Transitions API not supported");
+            }
+        </script>
+
+        <slot name="scripts" />
+    </body>
+</html>
