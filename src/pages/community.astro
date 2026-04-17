@@ -1,0 +1,210 @@
+---
+import "../styles/global.css";
+import { Font, type CssVariable } from "astro:assets";
+const FONTS: CssVariable[] = ["--font-sans", "--font-serif"];
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="view-transition" content="same-origin" />
+        <title>Community Breakfasts — Gia</title>
+        {FONTS.map((font) => <Font cssVariable={font} preload />)}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <!-- ─── NAV ─── -->
+        <nav>
+            <div class="nav-left">
+                <a href="/" class="nav-logo">gia <span>by AAA</span></a>
+                <a href="/community" class="nav-link active"
+                    >Community Breakfasts</a
+                >
+            </div>
+            <a href="/#booking" class="nav-cta">Try Gia for free →</a>
+        </nav>
+
+        <!-- ─── PAGE HEADER ─── -->
+        <div class="page-header">
+            <div class="page-header-left">
+                <div class="section-label">Community · Montréal</div>
+                <h1>Community<br /><em>Breakfasts.</em></h1>
+            </div>
+            <div class="page-header-right">
+                <p>
+                    Every few weeks, we bring together <strong
+                        >nonprofits, artists, and grant writers</strong
+                    > in Montréal for an informal morning conversation about funding,
+                    projects, and the things nobody tells you in the application forms.
+                </p>
+                <p>
+                    Free to attend. Held at Brique par Brique in Parc-Extension.
+                    Come as you are.
+                </p>
+                <div class="hosting-badge">
+                    <span class="badge-icon">🏡</span>
+                    <div class="hosting-badge-text">
+                        <strong>Hosted at Brique par Brique</strong>
+                        <span>Parc-Extension, Montréal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- ─── EVENTS ─── -->
+        <section class="events-section">
+            <!-- Upcoming callout -->
+            <div class="upcoming-callout">
+                <div>
+                    <div class="upcoming-callout-tag">↑ Next breakfast</div>
+                    <h2>Community Breakfast<br /><em>#02 — May 2026</em></h2>
+                    <p>
+                        The second morning gathering — picking up the
+                        conversation from April. Bring a grant question, a
+                        project update, or just your coffee order.
+                    </p>
+                    <div class="upcoming-callout-meta">
+                        <div class="upcoming-meta-item">
+                            📅 <strong>Date TBD</strong> · May 2026
+                        </div>
+                        <div class="upcoming-meta-item">
+                            📍 <strong>Brique par Brique</strong> · Parc-Extension
+                        </div>
+                        <div class="upcoming-meta-item">
+                            🕗 <strong>8:30 – 10:00 am</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="upcoming-callout-right">
+                    <a href="#" class="btn-upcoming">Reserve your spot →</a>
+                </div>
+            </div>
+
+            <div class="events-year-label">2026</div>
+
+            <!-- Event 1 — Past (Beta launch, April 17) -->
+            <a href="#" class="event-card">
+                <div class="event-date">
+                    <div class="event-date-day">17</div>
+                    <div class="event-date-month">April</div>
+                </div>
+                <div class="event-info">
+                    <div class="event-meta">
+                        <span class="event-status past">
+                            <span class="event-status-dot"></span>
+                            Recap available
+                        </span>
+                        <span class="event-number">Breakfast #01</span>
+                    </div>
+                    <h2>The beta launch breakfast</h2>
+                    <p>
+                        Gia's first morning gathering — introducing the
+                        platform, listening to grant challenges from the
+                        community, and kicking off the beta with 30 friends from
+                        Montréal's OBNL and arts ecosystem.
+                    </p>
+                    <div class="event-tags">
+                        <span class="event-tag">Beta launch</span>
+                        <span class="event-tag">OBNLs</span>
+                        <span class="event-tag">Artists</span>
+                        <span class="event-tag">Grant writing</span>
+                    </div>
+                </div>
+                <div class="event-card-right">
+                    <div class="event-photo-count">📷 24 photos</div>
+                    <div class="event-card-arrow">→</div>
+                </div>
+            </a>
+
+            <!-- Event 2 — Upcoming placeholder -->
+            <a href="#" class="event-card upcoming-event">
+                <div class="event-date">
+                    <div class="event-date-day">TBD</div>
+                    <div class="event-date-month">May 2026</div>
+                </div>
+                <div class="event-info">
+                    <div class="event-meta">
+                        <span class="event-status upcoming">
+                            <span class="event-status-dot"></span>
+                            Coming up
+                        </span>
+                        <span class="event-number">Breakfast #02</span>
+                    </div>
+                    <h2>Community Breakfast #02</h2>
+                    <p>
+                        Date and theme to be confirmed. Sign up to be notified
+                        when registration opens.
+                    </p>
+                    <div class="event-tags">
+                        <span class="event-tag">Montréal</span>
+                        <span class="event-tag">Brique par Brique</span>
+                    </div>
+                </div>
+                <div class="event-card-right">
+                    <div class="event-photo-count"></div>
+                    <div class="event-card-arrow">→</div>
+                </div>
+            </a>
+        </section>
+
+        <!-- ─── FOOTER ─── -->
+        <footer>
+            <div class="footer-logo">gia · heygia.ca</div>
+            <ul class="footer-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/#how-it-works">How it works</a></li>
+                <li><a href="#">For artists</a></li>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">FR / EN</a></li>
+            </ul>
+            <div class="footer-copy">
+                © 2026 Atelier Archives Appliqués · Une coopérative de
+                travailleurs · Montréal, Québec · heygia.ca
+            </div>
+        </footer>
+
+        <!-- View Transitions -->
+        <script>
+            // View Transition API polyfill and enhancement
+            if (document.startViewTransition) {
+                console.log("View Transitions API is supported");
+
+                // Intercept all link clicks for smooth transitions
+                document.addEventListener("click", (e) => {
+                    const link = e.target.closest("a");
+                    if (
+                        link &&
+                        link.href &&
+                        link.origin === window.location.origin
+                    ) {
+                        e.preventDefault();
+                        const url = new URL(link.href);
+
+                        // Use View Transition API for same-origin navigation
+                        const transition = document.startViewTransition(
+                            async () => {
+                                await new Promise((resolve) =>
+                                    setTimeout(resolve, 50),
+                                );
+                                window.location.href = url.href;
+                            },
+                        );
+                    }
+                });
+            } else {
+                // Fallback for browsers that don't support View Transitions
+                console.log("View Transitions API not supported");
+            }
+        </script>
+    </body>
+</html>

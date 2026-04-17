@@ -18,11 +18,11 @@ import plant from "../assets/images/plant.png";
     <body>
         <!-- ─── NAV ─── -->
         <nav>
-            <a href="/" class="nav-logo">Gia</a>
-            <div class="flex flex-row gap-0.5 justify-end">
-                <a class="nav-cta-reg">Community Breakfasts</a>
-                <a href="/coming-soon" class="nav-cta">Try Gia for free →</a>
+            <div class="nav-left">
+                <a href="/" class="nav-logo">gia <span>by AAA</span></a>
+                <a href="/community" class="nav-link">Community Breakfasts</a>
             </div>
+            <a href="/coming-soon" class="nav-cta">Try Gia for free →</a>
         </nav>
 
         <!-- ─── HERO ─── -->
@@ -574,30 +574,34 @@ import plant from "../assets/images/plant.png";
         <script>
             // View Transition API polyfill and enhancement
             if (document.startViewTransition) {
-                console.log('View Transitions API is supported');
-                
+                console.log("View Transitions API is supported");
+
                 // Intercept all link clicks for smooth transitions
-                document.addEventListener('click', (e) => {
-                    const link = e.target.closest('a');
+                document.addEventListener("click", (e) => {
+                    const link = e.target.closest("a");
                     if (
                         link &&
                         link.href &&
                         link.origin === window.location.origin &&
-                        !link.href.startsWith('#')
+                        !link.href.startsWith("#")
                     ) {
                         e.preventDefault();
                         const url = new URL(link.href);
-                        
+
                         // Use View Transition API for same-origin navigation
-                        const transition = document.startViewTransition(async () => {
-                            await new Promise(resolve => setTimeout(resolve, 50));
-                            window.location.href = url.href;
-                        });
+                        const transition = document.startViewTransition(
+                            async () => {
+                                await new Promise((resolve) =>
+                                    setTimeout(resolve, 50),
+                                );
+                                window.location.href = url.href;
+                            },
+                        );
                     }
                 });
             } else {
                 // Fallback for browsers that don't support View Transitions
-                console.log('View Transitions API not supported');
+                console.log("View Transitions API not supported");
             }
         </script>
 

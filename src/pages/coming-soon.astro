@@ -107,11 +107,11 @@ const FONTS: CssVariable[] = ["--font-sans", "--font-serif"];
         <script>
             // View Transition API polyfill and enhancement
             if (document.startViewTransition) {
-                console.log('View Transitions API is supported');
-                
+                console.log("View Transitions API is supported");
+
                 // Intercept all link clicks for smooth transitions
-                document.addEventListener('click', (e) => {
-                    const link = e.target.closest('a');
+                document.addEventListener("click", (e) => {
+                    const link = e.target.closest("a");
                     if (
                         link &&
                         link.href &&
@@ -119,12 +119,16 @@ const FONTS: CssVariable[] = ["--font-sans", "--font-serif"];
                     ) {
                         e.preventDefault();
                         const url = new URL(link.href);
-                        
+
                         // Use View Transition API for same-origin navigation
-                        const transition = document.startViewTransition(async () => {
-                            await new Promise(resolve => setTimeout(resolve, 50));
-                            window.location.href = url.href;
-                        });
+                        const transition = document.startViewTransition(
+                            async () => {
+                                await new Promise((resolve) =>
+                                    setTimeout(resolve, 50),
+                                );
+                                window.location.href = url.href;
+                            },
+                        );
                     }
                 });
             } else {
