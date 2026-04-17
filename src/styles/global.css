@@ -5,7 +5,7 @@
     --color-burgundy: #672537;
     --color-parchment: #f4ece3;
     --color-charcoal: #2c2b2b;
-    --color-green: #4a8400;
+    --color-green: #619b17;
     --font-sans: "Marcin Antique", sans-serif;
     --font-serif: "Bradford LL", serif;
 }
@@ -732,8 +732,8 @@ nav {
 
 /* ─── QUOTE ─── */
 .quote-section {
-    padding: var(--space-6xl) 48px;
-    background: var(--color-green);
+    padding: var(--space-7xl) 48px;
+    background: var(--color-burgundy);
     text-align: center;
     position: relative;
     overflow: hidden;
