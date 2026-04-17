@@ -1,14 +1,16 @@
-<!--
-  Layout.astro - Consistent layout for all pages
-  Includes navigation, footer, and common styles
--->
+---
+import "../styles/global.css";
+import { Font, type CssVariable, Picture } from "astro:assets";
+const FONTS: CssVariable[] = ["--font-sans", "--font-serif"];
+---
+
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="view-transition" content="same-origin" />
         <title>Gia</title>
-
+        {FONTS.map((font) => <Font cssVariable={font} preload />)}
         <slot name="head" />
     </head>
 
