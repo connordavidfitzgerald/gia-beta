@@ -1161,7 +1161,7 @@ section {
     font-weight: 500;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--sage-light);
+    color: var(--color-charcoal);
     margin-bottom: var(--space-md);
 }
 
