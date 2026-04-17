@@ -455,7 +455,7 @@ nav {
 
 .journey-sticky-container {
     position: relative;
-    height: 400vh;
+    height: fit-content;
 }
 
 .journey-sticky {
@@ -481,7 +481,8 @@ nav {
 }
 
 /* Hide plant-related elements since we're not using the animation */
-.plant-canvas, .plant-svg-wrap {
+.plant-canvas,
+.plant-svg-wrap {
     display: none;
 }
 
@@ -1046,6 +1047,65 @@ footer {
     margin-top: 24px;
     padding-top: 24px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ─── VIEW TRANSITIONS ─── */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+::view-transition-old(root),
+.dark ::view-transition-new(root) {
+    z-index: 1;
+}
+
+::view-transition-new(root),
+.dark ::view-transition-old(root) {
+    z-index: 9999;
+}
+
+/* Fade animation for content */
+.fade-in {
+    view-transition-name: fade-content;
+}
+
+/* Slide animation for page transitions */
+.slide-in {
+    view-transition-name: slide-content;
+}
+
+/* Custom animation for smooth transitions */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Apply transitions to main content areas */
+body {
+    view-transition-name: page-transition;
+}
+
+main {
+    view-transition-name: main-content;
 }
 
 /* ─── COMING SOON PAGE ─── */
