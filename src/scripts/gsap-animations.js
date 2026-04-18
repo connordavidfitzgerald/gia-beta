@@ -1,5 +1,5 @@
 // GSAP Text Reveal Animations for Gia Beta Index Page
-import { gsap } from "gsap";
+import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Register ScrollTrigger plugin
@@ -15,36 +15,36 @@ export function initTextReveals() {
 
     if (heroTag && heroTitle && heroSub && heroActions) {
         // Initial state - hidden
-        gsap.set([heroTag, heroTitle, heroSub, heroActions], { 
-            autoAlpha: 0, 
-            y: 30 
+        gsap.set([heroTag, heroTitle, heroSub, heroActions], {
+            autoAlpha: 0,
+            y: 30
         });
 
         // Staggered reveal animation
         const heroTL = gsap.timeline({delay: 0.5});
         heroTL
-            .to(heroTag, { 
-                autoAlpha: 1, 
-                y: 0, 
-                duration: 0.8, 
+            .to(heroTag, {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.8,
                 ease: "power3.out"
             })
-            .to(heroTitle, { 
-                autoAlpha: 1, 
-                y: 0, 
-                duration: 1, 
+            .to(heroTitle, {
+                autoAlpha: 1,
+                y: 0,
+                duration: 1,
                 ease: "power3.out"
             }, "-=0.3")
-            .to(heroSub, { 
-                autoAlpha: 1, 
-                y: 0, 
-                duration: 0.8, 
+            .to(heroSub, {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.8,
                 ease: "power3.out"
             }, "-=0.4")
-            .to(heroActions, { 
-                autoAlpha: 1, 
-                y: 0, 
-                duration: 0.8, 
+            .to(heroActions, {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.8,
                 ease: "power3.out"
             }, "-=0.5");
     }
@@ -59,8 +59,8 @@ export function initTextReveals() {
 
         if (stepNumber && panelTitle) {
             // Set initial state
-            gsap.set([stepNumber, panelTitle, panelParagraphs, detailList], { 
-                autoAlpha: 0, 
+            gsap.set([stepNumber, panelTitle, panelParagraphs, detailList], {
+                autoAlpha: 0,
                 y: 20
             });
 
@@ -72,26 +72,26 @@ export function initTextReveals() {
                 onEnter: () => {
                     const tl = gsap.timeline();
                     tl
-                        .to(stepNumber, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.6, 
+                        .to(stepNumber, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.6,
                             ease: "power2.out"
                         })
-                        .to(panelTitle, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.8, 
+                        .to(panelTitle, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.8,
                             ease: "power2.out"
                         }, "-=0.3");
 
                     // Animate paragraphs
                     if (panelParagraphs.length > 0) {
-                        tl.to(panelParagraphs, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.6, 
-                            stagger: 0.1, 
+                        tl.to(panelParagraphs, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.6,
+                            stagger: 0.1,
                             ease: "power2.out"
                         }, "-=0.4");
                     }
@@ -99,11 +99,11 @@ export function initTextReveals() {
                     // Animate detail list if exists
                     if (detailList) {
                         const listItems = detailList.querySelectorAll("li");
-                        tl.to(listItems, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.5, 
-                            stagger: 0.1, 
+                        tl.to(listItems, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.5,
+                            stagger: 0.1,
                             ease: "power2.out"
                         }, "-=0.3");
                     }
@@ -118,16 +118,16 @@ export function initTextReveals() {
 
     if (featuresHeadline) {
         gsap.set(featuresHeadline, { autoAlpha: 0, y: 30 });
-        
+
         ScrollTrigger.create({
             trigger: ".features",
             start: "top 80%",
             once: true,
             onEnter: () => {
-                gsap.to(featuresHeadline, { 
-                    autoAlpha: 1, 
-                    y: 0, 
-                    duration: 0.8, 
+                gsap.to(featuresHeadline, {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.8,
                     ease: "power3.out"
                 });
             }
@@ -140,8 +140,8 @@ export function initTextReveals() {
         const cardText = card.querySelector("p");
 
         if (cardIcon && cardTitle && cardText) {
-            gsap.set([cardIcon, cardTitle, cardText], { 
-                autoAlpha: 0, 
+            gsap.set([cardIcon, cardTitle, cardText], {
+                autoAlpha: 0,
                 y: 20
             });
 
@@ -152,22 +152,22 @@ export function initTextReveals() {
                 onEnter: () => {
                     const tl = gsap.timeline();
                     tl
-                        .to(cardIcon, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.5, 
+                        .to(cardIcon, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.5,
                             ease: "back.out(1.7)"
                         })
-                        .to(cardTitle, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.6, 
+                        .to(cardTitle, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.6,
                             ease: "power2.out"
                         }, "-=0.3")
-                        .to(cardText, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.6, 
+                        .to(cardText, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.6,
                             ease: "power2.out"
                         }, "-=0.4");
                 }
@@ -183,8 +183,8 @@ export function initTextReveals() {
         const quoteAttr = quoteSection.querySelector(".quote-attr");
 
         if (quoteMark && quoteText && quoteAttr) {
-            gsap.set([quoteMark, quoteText, quoteAttr], { 
-                autoAlpha: 0, 
+            gsap.set([quoteMark, quoteText, quoteAttr], {
+                autoAlpha: 0,
                 y: 20
             });
 
@@ -195,22 +195,22 @@ export function initTextReveals() {
                 onEnter: () => {
                     const tl = gsap.timeline();
                     tl
-                        .to(quoteMark, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.5, 
+                        .to(quoteMark, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.5,
                             ease: "power2.out"
                         })
-                        .to(quoteText, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.8, 
+                        .to(quoteText, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.8,
                             ease: "power2.out"
                         }, "-=0.3")
-                        .to(quoteAttr, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.6, 
+                        .to(quoteAttr, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.6,
                             ease: "power2.out"
                         }, "-=0.4");
                 }
@@ -224,16 +224,16 @@ export function initTextReveals() {
 
     if (pricingHeadline) {
         gsap.set(pricingHeadline, { autoAlpha: 0, y: 30 });
-        
+
         ScrollTrigger.create({
             trigger: ".pricing",
             start: "top 80%",
             once: true,
             onEnter: () => {
-                gsap.to(pricingHeadline, { 
-                    autoAlpha: 1, 
-                    y: 0, 
-                    duration: 0.8, 
+                gsap.to(pricingHeadline, {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.8,
                     ease: "power3.out"
                 });
             }
@@ -247,8 +247,8 @@ export function initTextReveals() {
         const cardButton = card.querySelector("a");
 
         if (cardTitle && cardPrice) {
-            gsap.set([cardTitle, cardPrice, cardFeatures, cardButton], { 
-                autoAlpha: 0, 
+            gsap.set([cardTitle, cardPrice, cardFeatures, cardButton], {
+                autoAlpha: 0,
                 y: 20
             });
 
@@ -259,35 +259,35 @@ export function initTextReveals() {
                 onEnter: () => {
                     const tl = gsap.timeline();
                     tl
-                        .to(cardTitle, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.6, 
+                        .to(cardTitle, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.6,
                             ease: "power2.out"
                         })
-                        .to(cardPrice, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.6, 
+                        .to(cardPrice, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.6,
                             ease: "power2.out"
                         }, "-=0.3");
 
                     if (cardFeatures) {
                         const features = cardFeatures.querySelectorAll("li");
-                        tl.to(features, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.5, 
-                            stagger: 0.1, 
+                        tl.to(features, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.5,
+                            stagger: 0.1,
                             ease: "power2.out"
                         }, "-=0.3");
                     }
 
                     if (cardButton) {
-                        tl.to(cardButton, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.6, 
+                        tl.to(cardButton, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.6,
                             ease: "power2.out"
                         }, "-=0.5");
                     }
@@ -305,8 +305,8 @@ export function initTextReveals() {
         const finalButton = finalCTA.querySelector(".btn-cta-large");
 
         if (jordaneAvatar && finalTitle && finalText && finalButton) {
-            gsap.set([jordaneAvatar, finalTitle, finalText, finalButton], { 
-                autoAlpha: 0, 
+            gsap.set([jordaneAvatar, finalTitle, finalText, finalButton], {
+                autoAlpha: 0,
                 y: 30
             });
 
@@ -317,28 +317,28 @@ export function initTextReveals() {
                 onEnter: () => {
                     const tl = gsap.timeline();
                     tl
-                        .to(jordaneAvatar, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.6, 
+                        .to(jordaneAvatar, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.6,
                             ease: "back.out(1.7)"
                         })
-                        .to(finalTitle, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.8, 
+                        .to(finalTitle, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.8,
                             ease: "power3.out"
                         }, "-=0.3")
-                        .to(finalText, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.6, 
+                        .to(finalText, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.6,
                             ease: "power2.out"
                         }, "-=0.4")
-                        .to(finalButton, { 
-                            autoAlpha: 1, 
-                            y: 0, 
-                            duration: 0.8, 
+                        .to(finalButton, {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.8,
                             ease: "power3.out"
                         }, "-=0.5");
                 }
