@@ -1,0 +1,376 @@
+---
+const steps = [
+    {
+        number: "01",
+        label: "The seed",
+        tag: "Free",
+        headline: "It starts with a real conversation.",
+        paragraphs: [
+            "A conversation. A space to be heard.",
+            "A thirty-minute to one-hour call with Jordane, our grants specialist. You tell us what you do, in your own words, we listen for what systems have yet to make room for.",
+            "Gia processes the transcript and your documents in one pass. By the time you log in for the first time, your first recommendations are already waiting.",
+        ],
+    },
+    {
+        number: "02",
+        label: "The intake",
+        tag: "Free",
+        headline: "Your identity.",
+        paragraphs: [
+            "After our call, Gia processes your essential documents and centralizes them in your document vault – letters patent, reports, financial statements. Organized, grounded, ready to use.",
+            "This profile becomes your organization's living memory. The more Gia knows about you, the more precise and rooted the recommendations become.",
+        ],
+    },
+    {
+        number: "03",
+        label: "The match",
+        tag: "Free",
+        headline: "The grants that fit.",
+        paragraphs: [
+            "Gia keeps it focused. It surfaces the opportunities most likely to lead to funding, with match quality, upcoming deadlines, and a clear line on why each one fits your project.",
+        ],
+    },
+    {
+        number: "04",
+        label: "The proposal",
+        tag: "10%",
+        headline: "Solo or with a Gia writer.",
+        paragraphs: [
+            "Write solo or with a Gia grants writer.",
+            "When you're ready to apply, our team takes it from there. We review your profile, select the best match, and write the application, so you can stay grounded in your mission and creative power.",
+            "Gia invoices 10% of the awarded amount, only if the grant comes through. Nothing upfront. Nothing if it doesn't.",
+        ],
+    },
+];
+
+const frameModules = import.meta.glob<string>(
+    "../assets/images/scroll-sequence/*.png",
+    { eager: true, query: "?url", import: "default" },
+);
+const frameUrls: string[] = Object.entries(frameModules)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([, url]) => url);
+const TOTAL_FRAMES = frameUrls.length;
+---
+
+<section id="how-it-works">
+    <div id="seq-track">
+        <div id="seq-sticky">
+            <div class="seq-inner">
+                <!-- Left: canvas for PNG sequence -->
+                <div class="seq-left">
+                    <canvas id="seq-canvas"></canvas>
+                </div>
+
+                <!-- Right: step text panels -->
+                <div class="seq-right">
+                    {
+                        steps.map((step, i) => (
+                            <div class="seq-step" data-step={i}>
+                                <p class="seq-label">
+                                    Step {step.number} | {step.label} ·{" "}
+                                    {step.tag}
+                                </p>
+                                <h2 class="seq-headline">{step.headline}</h2>
+                                <div class="seq-body">
+                                    {step.paragraphs.map((p) => (
+                                        <p>{p}</p>
+                                    ))}
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    #how-it-works {
+        background: var(--color-ivory);
+    }
+
+    #seq-track {
+        position: relative;
+        height: 400vh;
+    }
+
+    #seq-sticky {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .seq-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+        align-items: center;
+        width: 100%;
+        max-width: 1100px;
+        padding: 0 4rem;
+    }
+
+    .seq-left {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    #seq-canvas {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border-radius: 1.25rem;
+        display: block;
+    }
+
+    .seq-right {
+        position: relative;
+        height: 380px;
+    }
+
+    .seq-step {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+            opacity 0.45s ease,
+            transform 0.45s ease;
+        pointer-events: none;
+    }
+
+    .seq-step.is-active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    .seq-step.is-above {
+        transform: translateY(-20px);
+    }
+
+    .seq-label {
+        font-family: var(--font-sans);
+        font-size: var(--text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--color-burgundy);
+        margin-bottom: 1rem;
+    }
+
+    .seq-headline {
+        font-family: var(--font-serif);
+        font-size: var(--text-2xl);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: 0.01em;
+        color: var(--color-charcoal);
+        margin-bottom: 1.25rem;
+    }
+
+    .seq-body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .seq-body p {
+        font-family: var(--font-sans);
+        font-size: var(--text-md);
+        line-height: 1.6;
+        color: var(--color-burgundy);
+    }
+
+    #seq-dots {
+        position: absolute;
+        right: 2.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    .seq-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--color-charcoal);
+        opacity: 0.18;
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+    }
+
+    .seq-dot.is-active {
+        opacity: 0.75;
+        transform: scale(1.5);
+    }
+
+    @media (max-width: 768px) {
+        .seq-inner {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            padding: 0 1.5rem;
+        }
+
+        .seq-left {
+            justify-content: center;
+        }
+
+        #seq-canvas {
+            max-width: 320px;
+        }
+
+        .seq-right {
+            height: 420px;
+        }
+
+        #seq-dots {
+            right: 1rem;
+        }
+    }
+</style>
+
+<script define:vars={{ frameUrls, TOTAL_FRAMES }}>
+    // ---------------------------------------------------------------------------
+    // Element refs
+    // ---------------------------------------------------------------------------
+    const track = document.getElementById("seq-track");
+    const canvas = document.getElementById("seq-canvas");
+    const ctx = canvas.getContext("2d");
+    const stepEls = document.querySelectorAll(".seq-step");
+    const dotEls = document.querySelectorAll(".seq-dot");
+
+    let currentStep = -1;
+    let currentFrameIndex = 0;
+
+    // ---------------------------------------------------------------------------
+    // Image preloading
+    // ---------------------------------------------------------------------------
+    const images = frameUrls.map((src) => {
+        const img = new Image();
+        img.src = src;
+        return img;
+    });
+
+    // ---------------------------------------------------------------------------
+    // Canvas sizing
+    // ---------------------------------------------------------------------------
+    function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * window.devicePixelRatio;
+        canvas.height = rect.height * window.devicePixelRatio;
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        drawFrame(currentFrameIndex);
+    }
+
+    // ---------------------------------------------------------------------------
+    // Frame renderer
+    // ---------------------------------------------------------------------------
+    function drawFrame(frameIndex) {
+        const img = images[frameIndex];
+        if (!img) return;
+
+        const w = canvas.getBoundingClientRect().width;
+        const h = canvas.getBoundingClientRect().height;
+
+        ctx.clearRect(0, 0, w, h);
+
+        if (img.complete && img.naturalWidth > 0) {
+            ctx.drawImage(img, 0, 0, w, h);
+        } else {
+            img.onload = () => {
+                if (frameIndex === currentFrameIndex) {
+                    ctx.clearRect(0, 0, w, h);
+                    ctx.drawImage(img, 0, 0, w, h);
+                }
+            };
+        }
+    }
+
+    // ---------------------------------------------------------------------------
+    // Step transitions
+    // ---------------------------------------------------------------------------
+    function setStep(index) {
+        if (index === currentStep) return;
+        currentStep = index;
+
+        stepEls.forEach((el, i) => {
+            el.classList.remove("is-active", "is-above");
+            if (i === index) {
+                el.classList.add("is-active");
+            } else if (i < index) {
+                el.classList.add("is-above");
+            }
+        });
+
+        dotEls.forEach((dot, i) => {
+            dot.classList.toggle("is-active", i === index);
+        });
+    }
+
+    // ---------------------------------------------------------------------------
+    // Scroll handler
+    // ---------------------------------------------------------------------------
+    let ticking = false;
+
+    function update() {
+        const rect = track.getBoundingClientRect();
+        const scrolled = -rect.top;
+        const maxScroll = track.offsetHeight - window.innerHeight;
+
+        if (scrolled < 0 || scrolled > maxScroll) return;
+
+        const progress = Math.max(0, Math.min(1, scrolled / maxScroll));
+
+        const frameIndex = Math.min(
+            Math.floor(progress * TOTAL_FRAMES),
+            TOTAL_FRAMES - 1,
+        );
+
+        if (frameIndex !== currentFrameIndex) {
+            currentFrameIndex = frameIndex;
+            drawFrame(frameIndex);
+        }
+
+        const stepIndex = Math.min(
+            Math.floor(progress * stepEls.length),
+            stepEls.length - 1,
+        );
+        setStep(stepIndex);
+    }
+
+    function onScroll() {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                update();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
+    // ---------------------------------------------------------------------------
+    // Init
+    // ---------------------------------------------------------------------------
+    resizeCanvas();
+    setStep(0);
+
+    // Draw first frame once it loads if not already ready
+    if (!images[0].complete) {
+        images[0].onload = () => drawFrame(0);
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", resizeCanvas);
+</script>

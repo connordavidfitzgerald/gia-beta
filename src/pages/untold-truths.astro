@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
+import { Font, type CssVariable, Picture } from "astro:assets";
+const FONTS: CssVariable[] = ["--font-sans", "--font-serif"];
+import plant from "../assets/images/plant.png";
+import ScrollSequence from "../components/ScrollSequence.astro";
+import drawing from "../assets/images/gia_drawing.png";
+import quote from "../assets/images/quote-stickie.png";
+import workshop from "../assets/images/workshop.jpeg";
+---
+
+<Layout>
+    <section class="h-screen flex flex-col justify-center items-center">
+        <h1 class="font-serif text-xl text-burgundy">untold truths</h1>
+        <p class="font-sans text-center max-w-[600px] px-6 text-base pt-2">
+            Every two months, we bring together the members of the cultural
+            ecosystem, nonprofits, artists, and grant writers in Montréal to
+            open the conversation around funding, each other's projects, and
+            everything the application forms never reveal.
+        </p>
+        <a
+            href="/untold-truths-1"
+            class="relative w-[400px] aspect-4/5 rounded-2xl overflow-clip mt-10 block"
+        >
+            <Picture
+                src={workshop}
+                alt="workshop"
+                class="object-cover w-full h-full brightness-80"
+            />
+            <p
+                class="absolute bottom-0 left-0 p-6 text-white text-lg font-serif z-10"
+            >
+                untold truths series 01, Montréal
+            </p>
+        </a>
+    </section></Layout
+>

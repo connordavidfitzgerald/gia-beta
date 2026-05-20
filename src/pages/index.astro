@@ -4,955 +4,291 @@ import "../styles/global.css";
 import { Font, type CssVariable, Picture } from "astro:assets";
 const FONTS: CssVariable[] = ["--font-sans", "--font-serif"];
 import plant from "../assets/images/plant.png";
+import ScrollSequence from "../components/ScrollSequence.astro";
+import drawing from "../assets/images/gia_drawing_burg.png";
+import quote from "../assets/images/quote-stickie.png";
 ---
 
-<Layout title="Gia — Grants made simple.">
-    <a href="/community" slot="nav-links" class="nav-link"
-        >Community Breakfasts</a
+<Layout>
+    <section
+        id="hero"
+        class="relative h-screen min-h-[1080px] flex flex-col items-center justify-center gap-10"
     >
-
-    <!-- Main page content -->
-    <div class="page-content">
-        <!-- ─── HERO ─── -->
-        <section class="hero">
-            <div class="hero-bg"></div>
-            <div class="hero-content">
-                <div class="hero-tag">
-                    <span class="hero-tag-dot"></span>
-                    Now in beta · Montréal, Québec
-                </div>
-                <h1>Grants made<br /><em>simple.</em></h1>
-                <p class="hero-sub">
-                    Gia finds the right grants for your nonprofit or arts
-                    project — and helps you actually win them. Discovery is
-                    always free. You only pay when you're awarded.
-                </p>
-
-                <div class="hero-actions">
-                    <a href="/coming-soon" class="btn-primary">
-                        🌱 Try Gia for free
-                    </a>
-                    <a href="#how-it-works" class="btn-ghost">
-                        See how it works ↓
-                    </a>
-                </div>
-            </div>
-            <div class="hero-seed-hint">
-                <span>scroll</span>
-                <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
-                    <path
-                        d="M8 0v20M1 13l7 7 7-7"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"></path>
-                </svg>
-            </div>
-        </section>
-
-        <!-- ─── SCROLL JOURNEY ─── -->
-        <section id="how-it-works" class="journey">
-            <div class="journey-sticky-container">
-                <div class="journey-sticky">
-                    <div class="plant-canvas">
-                        <div class="plant-svg-wrap"></div>
-                    </div>
-                    <div class="journey-panels">
-                        <div class="journey-panel active" id="panel-0">
-                            <div class="step-number">
-                                Step 01 — The seed · Free
-                            </div>
-                            <h2>
-                                It starts with<br />a real <em>conversation.</em
-                                >
-                            </h2>
-                            <p>
-                                Book a free 20-minute discovery call with
-                                Jordane, our grant specialist. Tell her what
-                                you're working on — in your own words.
-                            </p>
-                            <p>
-                                After the call, Gia processes the transcript and
-                                your documents in one go, building a complete
-                                org profile. When you log in for the first time,
-                                your first grant recommendations are already
-                                waiting.
-                            </p>
-                            <ul class="detail-list">
-                                <li>20 minutes with a real human expert</li>
-                                <li>
-                                    Send your documents ahead — Gia handles the
-                                    rest
-                                </li>
-                                <li>
-                                    First login: recommendations already there
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="journey-panel" id="panel-1">
-                            <div class="step-number">
-                                Step 02 — The roots · Free
-                            </div>
-                            <h2>Gia builds your<br /><em>org profile.</em></h2>
-                            <p>
-                                After your call, Gia processes the transcript
-                                and your documents in one go — letters patent,
-                                annual report, financials. Everything lives in
-                                your document vault, organized and ready.
-                            </p>
-                            <p>
-                                This profile powers every grant match, now and
-                                in the future. The more Gia knows about your
-                                org, the sharper and more specific the
-                                recommendations become.
-                            </p>
-                            <ul class="detail-list">
-                                <li>
-                                    Documents processed once, referenced forever
-                                </li>
-                                <li>
-                                    Org profile reviewed and confirmed by
-                                    Jordane
-                                </li>
-                                <li>Your vault grows with every new project</li>
-                            </ul>
-                        </div>
-
-                        <div class="journey-panel" id="panel-2">
-                            <div class="step-number">
-                                Step 03 — The growth · Free
-                            </div>
-                            <h2>
-                                Grants ranked.<br /><em>Honest</em> about your chances.
-                            </h2>
-                            <p>
-                                Each grant card shows you match quality (Strong
-                                / Good / Possible), real acceptance rate data
-                                from funder reports, the next deadline, and a
-                                one-sentence explanation of why it fits your
-                                specific project.
-                            </p>
-                            <p>
-                                Every recommended grant also comes with a free
-                                application guide — what to prepare, what you
-                                already have, and how long it typically takes.
-                            </p>
-                            <ul class="detail-list">
-                                <li>
-                                    Match quality labels — no false confidence
-                                </li>
-                                <li>
-                                    Acceptance rates sourced from public funder
-                                    data
-                                </li>
-                                <li>
-                                    Application guide + document checklist
-                                    included
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="journey-panel" id="panel-3">
-                            <div class="step-number">
-                                Step 04 — The harvest · 10% on success only
-                            </div>
-                            <h2>
-                                Ready to apply?<br />Let <em>Jordane</em> write it.
-                            </h2>
-                            <p>
-                                When you're ready to apply, Jordane takes over.
-                                She reviews your profile, selects the strongest
-                                match, and writes the application herself — with
-                                AI generating the first draft internally to
-                                multiply her capacity.
-                            </p>
-                            <p>
-                                Gia charges 10% of the awarded amount — and only
-                                when you're successful. Nothing up front.
-                                Nothing if it doesn't come through.
-                            </p>
-                            <ul class="detail-list">
-                                <li>
-                                    Jordane writes and submits — you stay
-                                    focused on your work
-                                </li>
-                                <li>
-                                    10% of the awarded grant, payable only on
-                                    success
-                                </li>
-                                <li>
-                                    Industry standard is 8–12% — Gia is
-                                    intentionally lower
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ─── TRUST BAR ─── -->
-        <div class="trust-bar">
-            <div class="trust-item">
-                <div class="trust-icon">🏛️</div>
-                <span>CALQ, Canada Council, CAM, Canadian Heritage & more</span>
-            </div>
-            <div class="trust-item">
-                <div class="trust-icon">🌍</div>
-                <span>Bilingual French & English, day one</span>
-            </div>
-            <div class="trust-item">
-                <div class="trust-icon">🤝</div>
-                <span>A Montréal workers' cooperative</span>
-            </div>
-            <div class="trust-item">
-                <div class="trust-icon">🎯</div>
-                <span>Built exclusively for OBNLs & artists</span>
-            </div>
+        <h1 class="font-serif text-7xl tracking-[-0.5%] text-center">
+            Grants made<br /><span class=""></span>simple.
+        </h1>
+        <Picture src={drawing} alt="Gia drawing" class="w-[150px]" />
+        <p
+            class="font-sans text-[1rem] tracking-normal w-[400px] text-center leading-normal"
+        >
+            Gia restores the conversation between mission, practice and funders.
+            Discovery is always free. We take 10%, only once funding is secured.
+        </p>
+        <a class="text-sm uppercase tracking-wide underline"
+            >Join the waitlist</a
+        >
+        <div
+            class="flex flex-col items-center justify-center absolute bottom-10"
+        >
+            <span>Learn more</span>
+            <span>↓</span>
         </div>
-
-        <!-- ─── FEATURES ─── -->
-        <section class="features">
-            <div class="section-label">Why Gia</div>
-            <h2 class="features-headline">
-                Not another<br />grant <em>directory.</em>
+    </section>
+    <ScrollSequence />
+    <section
+        id="squares"
+        class="h-fit px-6 flex flex-col justify-center items-center pb-80"
+    >
+        <div
+            class="mx-auto max-w-[960px] flex justify-center items-center flex-col gap-8"
+        >
+            <h2
+                class="font-serif text-2xl tracking-normal leading-tight text-center mb-8"
+            >
+                Gia, a new way to inhabit<br />the world of grants.
             </h2>
 
-            <div class="features-grid">
-                <div class="feature-card">
-                    <span class="feature-icon">🧠</span>
-                    <h3>She learns your org</h3>
-                    <p>
-                        Your profile and document vault power every
-                        recommendation. Letters patent, annual report,
-                        financials — upload once, used forever. The more Gia
-                        knows, the sharper the matches.
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                <div
+                    class="bg-burgundy text-ivory aspect-square rounded-2xl flex flex-col justify-between items-start p-8"
+                >
+                    <h3
+                        class="font-serif text-xl lg:text-xl tracking-normal leading-tight"
+                    >
+                        Gia is built on conversation.
+                    </h3>
+                    <p
+                        class="font-sans text-lg sm:text-sm tracking-loose leading-normal text-ivory/70"
+                    >
+                        Gia is your private garden: fed by your official and
+                        legal documents, the ones needed to move energy forward
+                        and bring our visions into form. And the more Gia knows,
+                        the sharper the matches.
                     </p>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🎯</span>
-                    <h3>Ranked, not just listed</h3>
-                    <p>
-                        Gia doesn't dump 200 grants on you. She surfaces the 5
-                        most likely to succeed — and explains why, in plain
-                        language, based on your specific project and org
-                        profile.
+                <div
+                    class="bg-burgundy text-ivory aspect-square rounded-2xl flex flex-col justify-between items-start p-8"
+                >
+                    <h3
+                        class="font-serif text-xl lg:text-xl tracking-normal leading-tight"
+                    >
+                        Cultivate, with intention.
+                    </h3>
+                    <p
+                        class="font-sans text-lg sm:text-sm tracking-loose leading-normal text-ivory/70"
+                    >
+                        Move forward with clarity through the noise. Gia
+                        surfaces up to 5 grants that are most likely to succeed,
+                        and explains why, in plain language, based on your
+                        project and your organizational profile.
                     </p>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">📋</span>
-                    <h3>Application-ready guides</h3>
-                    <p>
-                        Every grant comes with a curated prep guide: what you
-                        need, what you already have, word limits, typical
-                        questions, estimated time. Built by Jordane, not an
-                        algorithm.
+                <div
+                    class="bg-burgundy text-ivory aspect-square rounded-2xl flex flex-col justify-between items-start p-8"
+                >
+                    <h3
+                        class="font-serif text-xl lg:text-xl tracking-normal leading-tight"
+                    >
+                        One project, one ecosystem.
+                    </h3>
+                    <p
+                        class="font-sans text-lg sm:text-sm tracking-loose leading-normal text-ivory/70"
+                    >
+                        Grants follow projects. Each funding need has its own
+                        project, with targeted grants and strategy.
                     </p>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">💬</span>
-                    <h3>Project-based, not org-wide</h3>
-                    <p>
-                        Grants follow projects, not the other way around. Each
-                        funding need gets its own project — with its own matched
-                        grants, application guide, and progress tracker.
+                <div
+                    class="bg-burgundy text-ivory aspect-square rounded-2xl flex flex-col justify-between items-start p-8"
+                >
+                    <h3
+                        class="font-serif text-xl lg:text-xl tracking-normal leading-tight"
+                    >
+                        Born from the same roots.
+                    </h3>
+                    <p
+                        class="font-sans text-lg sm:text-sm tracking-loose leading-normal text-ivory/70"
+                    >
+                        Gia is a solidarity cooperative, run by the same kind of
+                        organizations it supports. Here, mission leads.
                     </p>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🌿</span>
-                    <h3>Built for the social economy</h3>
-                    <p>
-                        We serve OBNLs and artists — that's it. Gia is a
-                        workers' cooperative, run by the same kind of
-                        organizations it serves. No corporate clients. No
-                        competing priorities.
+                <div
+                    class="bg-burgundy text-ivory aspect-square rounded-2xl flex flex-col justify-between items-start p-8"
+                >
+                    <h3
+                        class="font-serif text-xl lg:text-xl tracking-normal leading-tight"
+                    >
+                        Emotional intelligence as support.
+                    </h3>
+                    <p
+                        class="font-sans text-lg sm:text-sm tracking-loose leading-normal text-ivory/70"
+                    >
+                        Gia holds deep knowledge of Québec and Canadian funders.
+                        By combining cultural fluency and linguistic agility,
+                        Gia becomes the third space that takes the system apart,
+                        and puts it back together.
                     </p>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">👩</span>
-                    <h3>Human expertise at the core</h3>
-                    <p>
-                        Jordane has deep knowledge of Quebec and Canadian
-                        funders — CALQ, CAM, Canada Council, Canadian Heritage.
-                        That institutional knowledge is Gia's real competitive
-                        edge.
+                <div
+                    class="bg-burgundy text-ivory aspect-square rounded-2xl flex flex-col justify-between items-start p-8"
+                >
+                    <h3
+                        class="font-serif text-xl lg:text-xl tracking-normal leading-tight"
+                    >
+                        Cultivate, with intention.
+                    </h3>
+                    <p
+                        class="font-sans text-lg sm:text-sm tracking-loose leading-normal text-ivory/70"
+                    >
+                        Gia is your private garden: fed by your official and
+                        legal documents, the ones needed to move energy forward
+                        and bring our visions into form. And the more Gia knows,
+                        the sharper the matches.
                     </p>
                 </div>
             </div>
-        </section>
-
-        <!-- ─── PULL QUOTE ─── -->
-        <section class="quote-section">
-            <div class="quote-inner">
-                <span class="quote-mark">"</span>
-                <blockquote>
-                    Finding the right grant used to mean weeks of research and a
-                    pile of dead ends. Gia surfaced five matches in the time it
-                    took me to make a coffee — including two programs I'd never
-                    heard of.
-                </blockquote>
-                <p class="quote-attr">
-                    — Beta tester, arts organization, Montréal
+        </div>
+    </section>
+    <section
+        class="h-fit py-40 flex flex-col justify-center items-center gap-4 mt-30 bg-parchment rounded-2xl m-6"
+    >
+        <Picture
+            src={quote}
+            alt="quote"
+            class="h-[350px] w-auto opacity-70 brightness-110"
+        />
+        <p
+            class="font-sans text-base tracking-loose leading-normal text-burgundy/90"
+        >
+            beta user, untold truth, 160/175
+        </p>
+    </section>
+    <section
+        id="pricing"
+        class="h-screen min-h-[1080px] flex flex-col justify-center items-center -mt-10"
+    >
+        <h2
+            class="font-serif text-3xl tracking-normal leading-tight text-center"
+        >
+            How Gia grows with you.
+        </h2>
+        <p
+            class="font-sans text-[16px] tracking-normal leading-normal text-burgundy pt-3 pb-12 text-center w-[400px]"
+        >
+            Exploration is always free.<br />We're with you all the way to the
+            harvest.
+        </p>
+        <div class="flex flex-row w-[700px] h-[450px] gap-2 mt-10">
+            <div
+                class="bg-burgundy rounded-2xl flex flex-col justify-between h-full w-[50%] p-10 text-ivory"
+            >
+                <h3
+                    class="font-sans text-[18px] tracking-normal leading-tight text-center pt-2"
+                >
+                    Exploration & matching
+                    <br />
+                    <span class="opacity-70">Free</span>
+                </h3>
+                <p
+                    class="font-sans text-[16px] tracking-loose leading-normal opacity-50 pb-6 text-center"
+                >
+                    Everything starts with a conversation. We get to know you,
+                    your projects, your work on the ground, your pace.<br />100%
+                    free.
                 </p>
+                <a class="text-sm uppercase tracking-wide underline text-center"
+                    >Join the waitlist</a
+                >
             </div>
-        </section>
-
-        <!-- ─── PRICING ─── -->
-        <section class="pricing">
-            <div class="pricing-intro">
-                <div class="section-label">How it works</div>
-                <h2 class="features-headline">
-                    100% free to<br />discover. Pay only<br />when you <em
-                        >win.</em
-                    >
-                </h2>
-            </div>
-
-            <div class="pricing-cards">
-                <div class="pricing-card">
-                    <h3>Discovery & matching</h3>
-                    <div class="price">Free.</div>
-                    <p class="price-note">
-                        Everything up to the application is completely free — no
-                        credits, no subscription, no time limit. Explore as many
-                        projects as you need.
-                    </p>
-                    <ul class="pricing-features">
-                        <li>Free 20-minute discovery call with Jordane</li>
-                        <li>Org profile + document vault, always free</li>
-                        <li>Grant matching — all projects are free to match</li>
-                        <li>5 ranked recommendations per project</li>
-                        <li>Full application guides for every match</li>
-                        <li>Free positioning deep-dives for any grant</li>
-                        <li>Suggest grants to the database</li>
-                    </ul>
-                    <a href="/coming-soon" class="btn-outline"
-                        >Start for free →</a
-                    >
-                </div>
-
-                <div class="pricing-card featured">
-                    <div class="pricing-badge">Apply with Jordane</div>
-                    <h3>Let Jordane write it</h3>
-                    <div class="price">10%</div>
-                    <p class="price-note">
-                        of the awarded grant amount — and only if you're
-                        successful. Zero out of pocket if the grant isn't
-                        awarded.
-                    </p>
-                    <ul class="pricing-features">
-                        <li>
-                            Jordane selects the strongest match for your project
-                        </li>
-                        <li>Brief alignment call to confirm strategy</li>
-                        <li>Jordane writes and submits the application</li>
-                        <li>Progress tracked in your dashboard</li>
-                        <li>
-                            Payment captured automatically on award confirmation
-                        </li>
-                        <li>Zero risk — nothing owed if unsuccessful</li>
-                    </ul>
-                    <a href="/coming-soon" class="btn-white"
-                        >Book a discovery call →</a
-                    >
-                </div>
-            </div>
-
-            <p class="pricing-footnote">
-                Grant writers typically charge 8–12% of awarded amounts. Gia's
-                10% is intentionally at the lower end — and zero risk to you.
-            </p>
-        </section>
-
-        <!-- ─── FINAL CTA ─── -->
-        <section id="booking" class="final-cta">
-            <div class="final-cta-inner">
-                <div class="jordane-avatar">🌿</div>
-                <h2>Meet Jordane.<br /><em>Find your next grant.</em></h2>
-                <p>
-                    Book a free 20-minute discovery call with Jordane, our grant
-                    specialist. Tell her about your organization and what you're
-                    working on. You'll log in after the call and find Gia
-                    already has your first recommendations waiting — no forms,
-                    no homework required.
+            <div
+                class="bg-burgundy rounded-2xl flex flex-col justify-between h-full w-[50%] p-10 text-ivory"
+            >
+                <h3
+                    class="font-sans text-[18px] tracking-normal leading-tight text-center pt-2"
+                >
+                    Writing with Gia
+                    <br />
+                    <span class="opacity-70">10% on success only </span>
+                </h3>
+                <p
+                    class="font-sans text-[16px] tracking-loose leading-normal opacity-70 pb-6 text-center"
+                >
+                    A Gia grants writer writes with you and we're paid 10% of
+                    the awarded amount, only if the grant comes through.
                 </p>
-                <div class="final-cta-actions">
-                    <a href="/coming-soon" class="btn-cta-large">
-                        🌱 Book a free discovery call
-                    </a>
-                    <p class="cta-note">
-                        20 minutes. Free. No pressure. Available in French and
-                        English.
-                    </p>
-                </div>
+                <a class="text-sm uppercase tracking-wide underline text-center"
+                    >Contact Us</a
+                >
             </div>
-        </section>
-    </div>
-
-    <!-- Web3Forms Email Signup -->
-    <script slot="scripts">
-        const form = document.getElementById("email-form");
-        const submitBtn = form.querySelector('button[type="submit"]');
-
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const formData = new FormData(form);
-            formData.append(
-                "access_key",
-                "cb47c73b-587b-47cf-894c-3aeea5b3d35b",
-            );
-
-            const originalText = submitBtn.innerHTML;
-
-            submitBtn.innerHTML =
-                '<svg class="email-submit-arrow" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 6L7 12L15 18L12 22L4 12Z"/></svg>';
-            submitBtn.disabled = true;
-
-            try {
-                const response = await fetch(
-                    "https://api.web3forms.com/submit",
-                    {
-                        method: "POST",
-                        body: formData,
-                    },
-                );
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    alert("Success! Your email has been submitted.");
-                    form.reset();
-                } else {
-                    alert("Error: " + data.message);
-                }
-            } catch (error) {
-                alert("Something went wrong. Please try again.");
-            } finally {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }
-        });
-    </script>
-    <script>
-        // GSAP Text Reveal Animations for Gia Beta Index Page
-        import gsap from "gsap";
-        import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-        // Register ScrollTrigger plugin
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Text reveal animation function
-        export function initTextReveals() {
-            // Hero section animations
-            const heroTag = document.querySelector(".hero-tag");
-            const heroTitle = document.querySelector(".hero h1");
-            const heroSub = document.querySelector(".hero-sub");
-            const heroActions = document.querySelector(".hero-actions");
-
-            if (heroTag && heroTitle && heroSub && heroActions) {
-                // Initial state - hidden
-                gsap.set([heroTag, heroTitle, heroSub, heroActions], {
-                    autoAlpha: 0,
-                    y: 30,
-                });
-
-                // Staggered reveal animation
-                const heroTL = gsap.timeline();
-                heroTL
-                    .to(heroTag, {
-                        autoAlpha: 1,
-                        y: 0,
-                        duration: 0.6,
-                        ease: "power3.out",
-                    })
-                    .to(
-                        heroTitle,
-                        {
-                            autoAlpha: 1,
-                            y: 0,
-                            duration: 1,
-                            ease: "power3.out",
-                        },
-                        "-=0.3",
-                    )
-                    .to(
-                        heroSub,
-                        {
-                            autoAlpha: 1,
-                            y: 0,
-
-                            duration: 0.6,
-                            ease: "power3.out",
-                        },
-                        "-=0.4",
-                    )
-                    .to(
-                        heroActions,
-                        {
-                            autoAlpha: 1,
-                            y: 0,
-                            duration: 0.6,
-                            ease: "power3.out",
-                        },
-                        "-=0.5",
-                    );
-            }
-
-            // Journey panel animations
-            const journeyPanels = document.querySelectorAll(".journey-panel");
-            journeyPanels.forEach((panel, index) => {
-                const stepNumber = panel.querySelector(".step-number");
-                const panelTitle = panel.querySelector("h2");
-                const panelParagraphs = panel.querySelectorAll("p");
-                const detailList = panel.querySelector(".detail-list");
-
-                if (stepNumber && panelTitle) {
-                    // Set initial state
-                    gsap.set(
-                        [stepNumber, panelTitle, panelParagraphs, detailList],
-                        {
-                            autoAlpha: 0,
-                            y: 20,
-                        },
-                    );
-
-                    // Create animation for this panel
-                    ScrollTrigger.create({
-                        trigger: panel,
-                        start: "top 80%",
-                        once: true,
-                        onEnter: () => {
-                            const tl = gsap.timeline();
-                            tl.to(stepNumber, {
-                                autoAlpha: 1,
-                                y: 0,
-                                duration: 0.6,
-                                ease: "power2.out",
-                            }).to(
-                                panelTitle,
-                                {
-                                    autoAlpha: 1,
-                                    y: 0,
-                                    duration: 0.8,
-                                    ease: "power2.out",
-                                },
-                                "-=0.3",
-                            );
-
-                            // Animate paragraphs
-                            if (panelParagraphs.length > 0) {
-                                tl.to(
-                                    panelParagraphs,
-                                    {
-                                        autoAlpha: 1,
-                                        y: 0,
-                                        duration: 0.6,
-                                        stagger: 0.1,
-                                        ease: "power2.out",
-                                    },
-                                    "-=0.4",
-                                );
-                            }
-
-                            // Animate detail list if exists
-                            if (detailList) {
-                                const listItems =
-                                    detailList.querySelectorAll("li");
-                                tl.to(
-                                    listItems,
-                                    {
-                                        autoAlpha: 1,
-                                        y: 0,
-                                        duration: 0.5,
-                                        stagger: 0.1,
-                                        ease: "power2.out",
-                                    },
-                                    "-=0.3",
-                                );
-                            }
-                        },
-                    });
-                }
-            });
-
-            // Features section animations
-            const featuresHeadline =
-                document.querySelector(".features-headline");
-            const featureCards = document.querySelectorAll(".feature-card");
-
-            if (featuresHeadline) {
-                gsap.set(featuresHeadline, { autoAlpha: 0, y: 30 });
-
-                ScrollTrigger.create({
-                    trigger: ".features",
-                    start: "top 80%",
-                    once: true,
-                    onEnter: () => {
-                        gsap.to(featuresHeadline, {
-                            autoAlpha: 1,
-                            y: 0,
-                            duration: 0.8,
-                            ease: "power3.out",
-                        });
-                    },
-                });
-            }
-
-            // Quote section animation
-            const quoteSection = document.querySelector(".quote-section");
-            if (quoteSection) {
-                const quoteMark = quoteSection.querySelector(".quote-mark");
-                const quoteText = quoteSection.querySelector("blockquote");
-                const quoteAttr = quoteSection.querySelector(".quote-attr");
-
-                if (quoteMark && quoteText && quoteAttr) {
-                    gsap.set([quoteMark, quoteText, quoteAttr], {
-                        autoAlpha: 0,
-                        y: 20,
-                    });
-
-                    ScrollTrigger.create({
-                        trigger: quoteSection,
-                        start: "top 85%",
-                        once: true,
-                        onEnter: () => {
-                            const tl = gsap.timeline();
-                            tl.to(quoteMark, {
-                                autoAlpha: 1,
-                                y: 0,
-                                duration: 0.5,
-                                ease: "power2.out",
-                            })
-                                .to(
-                                    quoteText,
-                                    {
-                                        autoAlpha: 1,
-                                        y: 0,
-                                        duration: 0.8,
-                                        ease: "power2.out",
-                                    },
-                                    "-=0.3",
-                                )
-                                .to(
-                                    quoteAttr,
-                                    {
-                                        autoAlpha: 1,
-                                        y: 0,
-                                        duration: 0.6,
-                                        ease: "power2.out",
-                                    },
-                                    "-=0.4",
-                                );
-                        },
-                    });
-                }
-            }
-
-            // Pricing section animations
-            const pricingHeadline = document.querySelector(
-                ".pricing .features-headline",
-            );
-            const pricingCards = document.querySelectorAll(".pricing-card");
-
-            if (pricingHeadline) {
-                gsap.set(pricingHeadline, { autoAlpha: 0, y: 30 });
-
-                ScrollTrigger.create({
-                    trigger: ".pricing",
-                    start: "top 80%",
-                    once: true,
-                    onEnter: () => {
-                        gsap.to(pricingHeadline, {
-                            autoAlpha: 1,
-                            y: 0,
-                            duration: 0.8,
-                            ease: "power3.out",
-                        });
-                    },
-                });
-            }
-
-            pricingCards.forEach((card, index) => {
-                const cardTitle = card.querySelector("h3");
-                const cardPrice = card.querySelector(".price");
-                const cardFeatures = card.querySelector(".pricing-features");
-                const cardButton = card.querySelector("a");
-
-                if (cardTitle && cardPrice) {
-                    gsap.set([cardTitle, cardPrice, cardFeatures, cardButton], {
-                        autoAlpha: 0,
-                        y: 20,
-                    });
-
-                    ScrollTrigger.create({
-                        trigger: card,
-                        start: "top 90%",
-                        once: true,
-                        onEnter: () => {
-                            const tl = gsap.timeline();
-                            tl.to(cardTitle, {
-                                autoAlpha: 1,
-                                y: 0,
-                                duration: 0.6,
-                                ease: "power2.out",
-                            }).to(
-                                cardPrice,
-                                {
-                                    autoAlpha: 1,
-                                    y: 0,
-                                    duration: 0.6,
-                                    ease: "power2.out",
-                                },
-                                "-=0.3",
-                            );
-
-                            if (cardFeatures) {
-                                const features =
-                                    cardFeatures.querySelectorAll("li");
-                                tl.to(
-                                    features,
-                                    {
-                                        autoAlpha: 1,
-                                        y: 0,
-                                        duration: 0.5,
-                                        stagger: 0.1,
-                                        ease: "power2.out",
-                                    },
-                                    "-=0.3",
-                                );
-                            }
-
-                            if (cardButton) {
-                                tl.to(
-                                    cardButton,
-                                    {
-                                        autoAlpha: 1,
-                                        y: 0,
-                                        duration: 0.6,
-                                        ease: "power2.out",
-                                    },
-                                    "-=0.5",
-                                );
-                            }
-                        },
-                    });
-                }
-            });
-
-            // Final CTA animation
-            const finalCTA = document.querySelector(".final-cta");
-            if (finalCTA) {
-                const jordaneAvatar = finalCTA.querySelector(".jordane-avatar");
-                const finalTitle = finalCTA.querySelector("h2");
-                const finalText = finalCTA.querySelector("p");
-                const finalButton = finalCTA.querySelector(".btn-cta-large");
-
-                if (jordaneAvatar && finalTitle && finalText && finalButton) {
-                    gsap.set(
-                        [jordaneAvatar, finalTitle, finalText, finalButton],
-                        {
-                            autoAlpha: 0,
-                            y: 30,
-                        },
-                    );
-
-                    ScrollTrigger.create({
-                        trigger: finalCTA,
-                        start: "top 85%",
-                        once: true,
-                        onEnter: () => {
-                            const tl = gsap.timeline();
-                            tl.to(jordaneAvatar, {
-                                autoAlpha: 1,
-                                y: 0,
-                                duration: 0.6,
-                                ease: "back.out(1.7)",
-                            })
-                                .to(
-                                    finalTitle,
-                                    {
-                                        autoAlpha: 1,
-                                        y: 0,
-                                        duration: 0.8,
-                                        ease: "power3.out",
-                                    },
-                                    "-=0.3",
-                                )
-                                .to(
-                                    finalText,
-                                    {
-                                        autoAlpha: 1,
-                                        y: 0,
-                                        duration: 0.6,
-                                        ease: "power2.out",
-                                    },
-                                    "-=0.4",
-                                )
-                                .to(
-                                    finalButton,
-                                    {
-                                        autoAlpha: 1,
-                                        y: 0,
-                                        duration: 0.8,
-                                        ease: "power3.out",
-                                    },
-                                    "-=0.5",
-                                );
-                        },
-                    });
-                }
-            }
-        }
-
-        // Initialize animations when DOM is loaded
-        document.addEventListener("DOMContentLoaded", () => {
-            initTextReveals();
-        });
-    </script>
-    <!-- Scroll Logic -->
-    <script slot="scripts">
-        const panels = document.querySelectorAll(".journey-panel");
-        const plantEls = {
-            seed: document.getElementById("seed"),
-            pot: document.getElementById("pot"),
-            roots: document.getElementById("roots"),
-            stem: document.getElementById("stem"),
-            leaf1: document.getElementById("leaf-1"),
-            leaf2: document.getElementById("leaf-2"),
-            leaf3: document.getElementById("leaf-3"),
-            leaf4: document.getElementById("leaf-4"),
-            coins: document.getElementById("coins"),
-            topCoin: document.getElementById("top-coin"),
-        };
-
-        const labels = {
-            seed: document.getElementById("label-seed"),
-            roots: document.getElementById("label-roots"),
-            plant: document.getElementById("label-plant"),
-            full: document.getElementById("label-full"),
-        };
-
-        function show(el) {
-            if (el) el.style.opacity = "1";
-        }
-        function hide(el) {
-            if (el) el.style.opacity = "0";
-        }
-        function showLabel(key) {
-            if (labels[key]) labels[key].classList.add("visible");
-        }
-        function hideLabel(key) {
-            if (labels[key]) labels[key].classList.remove("visible");
-        }
-
-        const plantStates = [
-            () => {
-                show(plantEls.pot);
-                show(plantEls.seed);
-                hide(plantEls.roots);
-                hide(plantEls.stem);
-                hide(plantEls.leaf1);
-                hide(plantEls.leaf2);
-                hide(plantEls.leaf3);
-                hide(plantEls.leaf4);
-                hide(plantEls.coins);
-                hide(plantEls.topCoin);
-                showLabel("seed");
-                hideLabel("roots");
-                hideLabel("plant");
-                hideLabel("full");
-            },
-            () => {
-                show(plantEls.pot);
-                show(plantEls.seed);
-                show(plantEls.roots);
-                show(plantEls.stem);
-                show(plantEls.leaf1);
-                hide(plantEls.leaf2);
-                hide(plantEls.leaf3);
-                hide(plantEls.leaf4);
-                hide(plantEls.coins);
-                hide(plantEls.topCoin);
-                hideLabel("seed");
-                showLabel("roots");
-                hideLabel("plant");
-                hideLabel("full");
-            },
-            () => {
-                show(plantEls.pot);
-                show(plantEls.seed);
-                show(plantEls.roots);
-                show(plantEls.stem);
-                show(plantEls.leaf1);
-                show(plantEls.leaf2);
-                show(plantEls.leaf3);
-                show(plantEls.leaf4);
-                hide(plantEls.coins);
-                hide(plantEls.topCoin);
-                hideLabel("seed");
-                hideLabel("roots");
-                showLabel("plant");
-                hideLabel("full");
-            },
-            () => {
-                show(plantEls.pot);
-                show(plantEls.seed);
-                show(plantEls.roots);
-                show(plantEls.stem);
-                show(plantEls.leaf1);
-                show(plantEls.leaf2);
-                show(plantEls.leaf3);
-                show(plantEls.leaf4);
-                show(plantEls.coins);
-                show(plantEls.topCoin);
-                hideLabel("seed");
-                hideLabel("roots");
-                hideLabel("plant");
-                showLabel("full");
-            },
-        ];
-
-        Object.values(plantEls).forEach((el) => {
-            if (el)
-                el.style.transition = "opacity 0.7s cubic-bezier(0.4,0,0.2,1)";
-        });
-
-        let currentStep = 0;
-        plantStates[0]();
-
-        function setStep(step) {
-            if (step === currentStep) return;
-            currentStep = step;
-            panels.forEach((p, i) => p.classList.toggle("active", i === step));
-            if (plantStates[step]) plantStates[step]();
-        }
-
-        function isMobile() {
-            return window.innerWidth < 769;
-        }
-
-        window.addEventListener("scroll", () => {
-            if (isMobile()) return;
-            const container = document.querySelector(
-                ".journey-sticky-container",
-            );
-            if (!container) return;
-            const rect = container.getBoundingClientRect();
-            const scrolled = -rect.top;
-            const maxScroll = container.offsetHeight - window.innerHeight;
-            if (scrolled < 0 || maxScroll <= 0) {
-                setStep(0);
-                return;
-            }
-            const progress = Math.min(scrolled / maxScroll, 1);
-            setStep(Math.min(Math.floor(progress * 4), 3));
-        });
-    </script>
+        </div>
+        <p
+            class="font-sans text-sm tracking-normal leading-normal text-burgundy/70 text-center w-[600px] rounded-2xl px-10 pt-4 mt-2"
+        >
+            Grant writers typically charge 8–12% of awarded amounts. Gia's 10%
+            is intentionally at the lower end and zero risk to you.
+        </p>
+    </section>
 </Layout>
 
-<style>
-    .page-content {
-        padding-top: 80px;
+<script>
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Walk only text nodes so <br>, <span>, and other tags are preserved as-is.
+    function wrapWords(el: Element) {
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+        const textNodes: Text[] = [];
+        let node: Node | null;
+        while ((node = walker.nextNode())) textNodes.push(node as Text);
+
+        for (const textNode of textNodes) {
+            const words = (textNode.textContent ?? "")
+                .trim()
+                .split(/\s+/)
+                .filter(Boolean);
+            if (!words.length) continue;
+
+            const frag = document.createDocumentFragment();
+            words.forEach((word, i) => {
+                if (i > 0) frag.appendChild(document.createTextNode(" "));
+                const mask = document.createElement("span");
+                mask.className = "rm";
+                const inner = document.createElement("span");
+                inner.className = "rw";
+                inner.textContent = word;
+                mask.appendChild(inner);
+                frag.appendChild(mask);
+            });
+            textNode.parentNode?.replaceChild(frag, textNode);
+        }
     }
-</style>
+
+    function reveal(selector: string, scroll: boolean, delay = 0) {
+        const el = document.querySelector(selector);
+        if (!el) return;
+        wrapWords(el);
+        const words = el.querySelectorAll<HTMLElement>(".rw");
+
+        gsap.from(words, {
+            y: "115%",
+            duration: 1,
+            ease: "power3.out",
+            stagger: 0.03,
+            delay: scroll ? 0 : delay,
+            ...(scroll && {
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 85%",
+                },
+            }),
+        });
+    }
+
+    // Hero fires on load; squares and pricing fire on scroll
+    reveal("#hero h1", false, 0.25);
+    reveal("#squares h2", true);
+    reveal("#pricing h2", true);
+</script>

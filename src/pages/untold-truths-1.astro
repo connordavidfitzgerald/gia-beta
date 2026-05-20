@@ -1,0 +1,136 @@
+---
+import Layout from "../layouts/Layout.astro";
+import WebScene from "../components/WebScene.astro";
+import { Picture } from "astro:assets";
+import workshop from "../assets/images/workshop.jpeg";
+
+// Glob everything under untold-truths-1/ and split by subfolder name.
+const allModules = import.meta.glob<string>(
+    "../assets/images/untold-truths/untold-truths-1/**/*.{jpg,jpeg,png,webp}",
+    { eager: true, query: "?url", import: "default" },
+);
+
+function teamUrls(folderName: string) {
+    return Object.entries(allModules)
+        .filter(([path]) => path.includes(`/${folderName}/`))
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([, url]) => url);
+}
+
+const teams = [
+    { label: "Team 1", urls: teamUrls("team 1") },
+    { label: "Team 2", urls: teamUrls("team 2") },
+];
+---
+
+<Layout>
+    <section class="min-h-screen flex flex-col items-center justify-start">
+        <div class="h-fit w-full">
+            <Picture src={workshop} alt="workshop" class="w-full" />
+        </div>
+
+        <h1
+            class="font-serif text-xl color-burgundy text-center leading-tight pt-30"
+        >
+            untold truths, series 01 <br /> montréal, qc
+        </h1>
+
+        <p class="font-sans text-[14px] color-burgundy w-[600px] py-10">
+            All the planets were aligned for the launch of Gia's first event,
+            between the sun warming Montréal's streets to twenty-two degrees for
+            the first time since the start of winter, and the energy of our
+            guests, April 17th, 2026 was a luminous day, filled with love and
+            hope. Nonprofit members, designers, writers, artists, booksellers,
+            accountants, engineers, navigating cultural ecosystems, real estate,
+            film, education, technology, and food services. I watched exchanges
+            unfold between souls who, just minutes before, had been complete
+            strangers.<br /><br />Gathered in the new space at Brique par
+            Brique, we improvised (but always with intention) this meeting to
+            take the time to put words to things. Words about what isn't working
+            in the grants system. Because the decade unfolding around us has
+            taught us to identify, to denounce, to expose even to cancel. But
+            cancel culture isolates. Gia re-enchants. So that morning, we formed
+            three groups and worked in two phases: problems / solutions. To try
+            to put on paper the experiences and challenges encountered
+            throughout the process of researching and writing grant
+            applications. Very quickly, a kind of creative momentum filled the
+            room, suddenly everything made even more sense. We needed this
+            conversation. We needed to lay it all out together.
+        </p>
+
+        <div class="h-fit max-w-[800px] py-30 w-full">
+            <WebScene teams={teams} height="800px" />
+        </div>
+
+        <p class="font-sans text-[14px] color-burgundy w-[600px] pb-10">
+            As I meticulously digitize the one hundred and seventy-five sticky
+            notes from the workshop, I suddenly come across these two words
+            followed by an arrow pointing toward love: "feeling alone → finding
+            resources & friends for support." In that moment, I understand what
+            this entire ecosystem had been missing: dialogue, listening, human
+            warmth. The genesis of Gia. And in the middle of all of this, the
+            work beneath the work. Because these sticky notes, these untold
+            truths, revealed territories of unexpected richness that we will
+            explore to cultivate our connections, our dreams, and Gia.<br /><br
+            />
+            Among the one hundred and seventy-five sticky notes, I sometimes read
+            the same message, written with different words, in lowercase, in capitals,
+            circled, punctuated, decorated… Signals for a real need for expression.
+            Starting from your messages, we identified ten key perspectives:
+        </p>
+        <p
+            class="font-sans text-[14px] text-center color-burgundy w-[600px] pb-10"
+        >
+            untold truth #1: The inaccessibility of the system<br />
+            untold truth #2: Language as a barrier to exclusion<br />
+            untold truth #3: Time as an exhausted resource<br />
+            untold truth #4: Unrecognized work / denied value<br />
+            untold truth #5: The opacity of eligibility<br />
+            untold truth #6: Competition and the grip of the system<br />
+            untold truth #7: The project above the mission / the process<br />
+            untold truth #8: Tokenization and instrumentalization<br />
+            untold truth #9: The absence of feedback and institutional silence<br
+            />
+            untold truth #10: The structural exclusion of certain communities<br
+            />
+        </p>
+        <p class="font-sans text-[14px] color-burgundy w-[600px] pb-10">
+            From there, we identified five areas of influence to untangle,
+            dissolve, and transform the myths and narratives that, over time,
+            have built up around the public funding system. With one clear goal:
+            to re-enchant the dialogue between financial partners and funded
+            entities, ground the ecosystem in reality, and illuminate social
+            elevation.
+        </p>
+
+        <p
+            class="font-sans text-[14px] text-center color-burgundy w-[600px] pb-10"
+        >
+            Territory #1: Mapping and access to information<br />
+            Territory #2: Semantic translation: the heart of Gia<br />
+            Territory #3: Upstream eligibility verification<br />
+            Territory #4: Community and resource-sharing<br />
+            Territory #5: Structural solutions beyond the tool<br />
+        </p>
+
+        <p class="font-sans text-[14px] color-burgundy w-[600px] pb-30">
+            Today, Gia is a raw diamond that we are polishing together, little
+            by little, with precision , thanks to the words that have finally
+            found their place, and the ears that knew how to listen to the walls
+            :) <br /><br />
+
+            Last Thursday, April 23rd, we have already begun onboarding artists
+            and organizations to rewrite narratives in a way that is honest and
+            current, with the goal of creating eighty profiles on Gia by
+            September 2026. To take the time to talk, to listen, to meet. To
+            understand experiences and feelings. To capture the essence of each
+            project and translate it as authentically as possible. To weave the
+            invisible threads that connect us, and bring them to light. Because
+            we will be a solidarity cooperative, we will be able to seek funding
+            ourselves once Gia becomes a proven model. How? Simply by playing
+            with Gia. The more we use it, the more material we have to feed Gia,
+            and the more we feed Gia, the more weight we carry in the eyes of
+            our (future) financial partners. A virtuous circle!
+        </p>
+    </section>
+</Layout>

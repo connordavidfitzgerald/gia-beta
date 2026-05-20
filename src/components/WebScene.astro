@@ -1,0 +1,430 @@
+---
+interface Team {
+    label: string;
+    urls: string[];
+}
+
+interface Props {
+    teams: Team[];
+    height?: string;
+}
+
+const { teams, height = "560px" } = Astro.props;
+---
+
+<div class="web-scene-wrapper">
+    <div class="web-scene-container" style={`height: ${height};`}>
+        <canvas
+            id="web-canvas"
+            data-teams={JSON.stringify(teams)}
+            class="absolute inset-0 w-full h-full"></canvas>
+
+        <div class="web-scene-btns">
+            {
+                teams.map((t, i) => (
+                    <button
+                        class:list={["team-btn", { "is-active": i === 0 }]}
+                        data-team-index={i}
+                    >
+                        {t.label}
+                    </button>
+                ))
+            }
+        </div>
+
+        <!-- Image overlay — contained within the scene border-radius -->
+        <div class="ws-overlay">
+            <img class="ws-overlay-img" src="" alt="" />
+        </div>
+    </div>
+</div>
+
+<style>
+    .web-scene-wrapper {
+        width: 100%;
+    }
+
+    .web-scene-container {
+        position: relative;
+        width: 100%;
+        border-radius: 1.25rem;
+        overflow: hidden;
+        background: var(--color-burgundy);
+    }
+
+    .web-scene-btns {
+        position: absolute;
+        bottom: 1.25rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 0.375rem;
+        z-index: 10;
+    }
+
+    .team-btn {
+        font-family: var(--font-sans);
+        font-size: var(--text-xs);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 0.45rem 1.1rem;
+        border-radius: var(--radius-full);
+        border: 1.5px solid var(--color-parchment);
+        background: transparent;
+        color: var(--color-ivory);
+        cursor: pointer;
+        transition:
+            background 0.2s ease,
+            color 0.2s ease;
+        white-space: nowrap;
+    }
+
+    .team-btn.is-active {
+        background: var(--color-ivory);
+        color: var(--color-burgundy);
+    }
+
+    .team-btn:not(.is-active):hover {
+        background: var(--color-parchment);
+    }
+
+    /* ── Overlay */
+    .ws-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 20;
+        cursor: default;
+    }
+
+    .ws-overlay-img {
+        max-width: 72%;
+        max-height: 72%;
+        object-fit: contain;
+        border-radius: 0.75rem;
+        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.22);
+        cursor: default;
+        will-change: transform;
+    }
+</style>
+
+<script>
+    import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    import { gsap } from "gsap";
+
+    interface TeamData {
+        label: string;
+        urls: string[];
+    }
+
+    let disposeScene: (() => void) | null = null;
+    let doSwitch: ((idx: number) => void) | null = null;
+
+    function buildNodes(count: number, radius: number): THREE.Vector3[] {
+        const nodes: THREE.Vector3[] = [];
+        for (let i = 0; i < count; i++) {
+            const phi = Math.acos(1 - (2 * (i + 0.5)) / count);
+            const theta = Math.PI * (1 + Math.sqrt(5)) * i;
+            nodes.push(
+                new THREE.Vector3(
+                    radius * Math.sin(phi) * Math.cos(theta),
+                    radius * Math.sin(phi) * Math.sin(theta),
+                    radius * Math.cos(phi),
+                ),
+            );
+        }
+        return nodes;
+    }
+
+    function initScene(canvas: HTMLCanvasElement, teams: TeamData[]) {
+        gsap.fromTo(
+            canvas,
+            { opacity: 0 },
+            { opacity: 1, duration: 2, delay: 0.4, ease: "power3.out" },
+        );
+
+        // ── Renderer
+        const renderer = new THREE.WebGLRenderer({
+            canvas,
+            antialias: true,
+            alpha: true,
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+
+        // ── Scene & camera
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+            55,
+            canvas.clientWidth / canvas.clientHeight,
+            0.1,
+            100,
+        );
+        camera.position.z = 9;
+
+        // ── Controls
+        const controls = new OrbitControls(camera, canvas);
+        controls.enableDamping = true;
+        controls.enablePan = false;
+        controls.dampingFactor = 0.05;
+        controls.minDistance = 3;
+        controls.maxDistance = 18;
+
+        let lastInteractionTime = Date.now();
+        controls.addEventListener("change", () => {
+            lastInteractionTime = Date.now();
+        });
+
+        // ── Group
+        const group = new THREE.Group();
+        scene.add(group);
+
+        // ── Per-team sprite arrays and node positions
+        const SPHERE_R = 2.5;
+        const SPRITE_H = 0.55;
+        const loader = new THREE.TextureLoader();
+
+        let activeTeam = 0;
+
+        const teamSprites: THREE.Sprite[][] = teams.map(() => []);
+        const teamNodes = teams.map((t) =>
+            buildNodes(Math.max(t.urls.length, 1), SPHERE_R),
+        );
+
+        teams.forEach((team, teamIdx) => {
+            team.urls.forEach((url, i) => {
+                loader.load(url, (texture) => {
+                    const aspect = texture.image.width / texture.image.height;
+                    const mat = new THREE.SpriteMaterial({
+                        map: texture,
+                        transparent: true,
+                        opacity: teamIdx === activeTeam ? 1 : 0,
+                    });
+                    const sprite = new THREE.Sprite(mat);
+                    sprite.position.copy(teamNodes[teamIdx][i]);
+                    sprite.scale.set(SPRITE_H * aspect, SPRITE_H, 1);
+                    sprite.visible = teamIdx === activeTeam;
+                    sprite.userData = { url, index: i, teamIndex: teamIdx };
+                    group.add(sprite);
+                    teamSprites[teamIdx].push(sprite);
+                });
+            });
+        });
+
+        // ── Team switch
+        function switchTeam(idx: number) {
+            if (idx === activeTeam) return;
+            const prev = activeTeam;
+            activeTeam = idx;
+
+            teamSprites[prev].forEach((s) => {
+                gsap.killTweensOf(s.material);
+                gsap.to(s.material, {
+                    opacity: 0,
+                    duration: 0.35,
+                    ease: "power2.out",
+                    onComplete: () => {
+                        s.visible = false;
+                    },
+                });
+            });
+
+            teamSprites[idx].forEach((s) => {
+                gsap.killTweensOf(s.material);
+                s.visible = true;
+                gsap.to(s.material, {
+                    opacity: 1,
+                    duration: 0.5,
+                    delay: 0.15,
+                    ease: "power2.out",
+                });
+            });
+        }
+
+        doSwitch = switchTeam;
+
+        // ── Overlay
+        const container = canvas.closest(".web-scene-container") as HTMLElement;
+        const overlay = container.querySelector(".ws-overlay") as HTMLElement;
+        const overlayImg = overlay.querySelector(
+            ".ws-overlay-img",
+        ) as HTMLImageElement;
+
+        function openOverlay(url: string) {
+            overlayImg.src = url;
+            gsap.set(overlay, { pointerEvents: "auto" });
+            gsap.fromTo(
+                overlay,
+                { opacity: 0 },
+                { opacity: 1, duration: 0.25, ease: "power2.out" },
+            );
+            gsap.fromTo(
+                overlayImg,
+                { scale: 0.93 },
+                { scale: 1, duration: 0.3, ease: "power3.out" },
+            );
+        }
+
+        function closeOverlay() {
+            gsap.to(overlay, {
+                opacity: 0,
+                duration: 0.2,
+                ease: "power2.in",
+                onComplete: () => gsap.set(overlay, { pointerEvents: "none" }),
+            });
+            gsap.to(overlayImg, {
+                scale: 0.93,
+                duration: 0.2,
+                ease: "power2.in",
+            });
+        }
+
+        overlay.addEventListener("click", (e) => {
+            if (e.target === overlay) closeOverlay();
+        });
+
+        // ── Click detection
+        const raycaster = new THREE.Raycaster();
+        const pointer = new THREE.Vector2();
+        let pointerDown = { x: 0, y: 0 };
+
+        const onPointerDown = (e: PointerEvent) => {
+            pointerDown = { x: e.clientX, y: e.clientY };
+        };
+        const onPointerUp = (e: PointerEvent) => {
+            if (
+                Math.hypot(
+                    e.clientX - pointerDown.x,
+                    e.clientY - pointerDown.y,
+                ) > 5
+            )
+                return;
+            const rect = canvas.getBoundingClientRect();
+            pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+            pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+            raycaster.setFromCamera(pointer, camera);
+            const allSprites = teamSprites.flat();
+            const hits = raycaster.intersectObjects(allSprites);
+            if (hits.length > 0) {
+                const { url } = hits[0].object.userData;
+                openOverlay(url);
+            }
+        };
+
+        canvas.addEventListener("pointerdown", onPointerDown);
+        canvas.addEventListener("pointerup", onPointerUp);
+
+        // ── Resize
+        const ro = new ResizeObserver(() => {
+            const w = canvas.clientWidth;
+            const h = canvas.clientHeight;
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h, false);
+        });
+        ro.observe(canvas);
+
+        // ── Render loop
+        let rafId = 0;
+        let running = false;
+
+        function startLoop() {
+            if (running) return;
+            running = true;
+            function tick() {
+                if (!running) return;
+                rafId = requestAnimationFrame(tick);
+                controls.update();
+                if (Date.now() - lastInteractionTime > 1000)
+                    group.rotation.y += 0.001;
+                renderer.render(scene, camera);
+            }
+            tick();
+        }
+
+        function stopLoop() {
+            running = false;
+            cancelAnimationFrame(rafId);
+        }
+
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                entry.isIntersecting ? startLoop() : stopLoop();
+            },
+            { threshold: 0.05 },
+        );
+        io.observe(canvas);
+        startLoop();
+
+        return () => {
+            doSwitch = null;
+            stopLoop();
+            io.disconnect();
+            ro.disconnect();
+            canvas.removeEventListener("pointerdown", onPointerDown);
+            canvas.removeEventListener("pointerup", onPointerUp);
+            controls.dispose();
+            renderer.dispose();
+        };
+    }
+
+    function tryInit() {
+        disposeScene?.();
+        disposeScene = null;
+        doSwitch = null;
+
+        const canvas = document.getElementById(
+            "web-canvas",
+        ) as HTMLCanvasElement | null;
+        if (!canvas) return;
+
+        const teams: TeamData[] = JSON.parse(canvas.dataset.teams ?? "[]");
+
+        // Wire up toggle buttons — use { once: false } but replace via clone to
+        // avoid stacking listeners on repeated tryInit calls (e.g. hot-reload).
+        const buttons =
+            document.querySelectorAll<HTMLButtonElement>(".team-btn");
+        buttons.forEach((btn) => {
+            const fresh = btn.cloneNode(true) as HTMLButtonElement;
+            btn.replaceWith(fresh);
+            fresh.addEventListener("click", () => {
+                const idx = parseInt(fresh.dataset.teamIndex ?? "0");
+                doSwitch?.(idx);
+                document
+                    .querySelectorAll<HTMLButtonElement>(".team-btn")
+                    .forEach((b) =>
+                        b.classList.toggle("is-active", b === fresh),
+                    );
+            });
+        });
+
+        function attempt() {
+            if (!canvas!.isConnected) return;
+            if (canvas!.clientWidth === 0 || canvas!.clientHeight === 0) {
+                requestAnimationFrame(attempt);
+                return;
+            }
+            disposeScene = initScene(canvas!, teams);
+        }
+        requestAnimationFrame(attempt);
+    }
+
+    document.addEventListener("astro:before-swap", () => {
+        disposeScene?.();
+        disposeScene = null;
+        doSwitch = null;
+    });
+
+    // astro:page-load fires with Astro's built-in View Transitions.
+    // The direct call handles initial load for all other setups.
+    document.addEventListener("astro:page-load", tryInit);
+    tryInit();
+</script>
